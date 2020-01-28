@@ -45,6 +45,7 @@ public:
     bool Load(Tokenizer &t);
     void Draw(const glm::mat4& viewProjMtx, GLuint shader);
     void SetName(string nm);
+    string GetName();
     vector<joint*> GetChildren();
     //Matrix34* AdjustPose();
     Matrix34 GetWorldMatrix();

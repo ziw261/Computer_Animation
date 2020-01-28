@@ -16,7 +16,10 @@ bool Skeleton::Load(const char* fname){
     Tokenizer t =  Tokenizer();
     t. Open(fname);
     t. FindToken("balljoint");
+    char tempName[256];
+    t.GetToken(tempName);
     joint* jt = new joint();
+    jt->SetName(tempName);
     this->SetRoot(jt);
     this->GetRoot()->Load(t);
     t.Close();

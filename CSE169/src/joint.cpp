@@ -37,6 +37,7 @@ Matrix34 joint::GetWorldMatrix(){
 }
 
 bool joint::Load(Tokenizer &t){
+    //t.FindToken("balljoint");
     t.FindToken("{");
     while(1){
         char temp[256];
@@ -87,8 +88,12 @@ bool joint::Load(Tokenizer &t){
         
         else if(strcmp(temp,"balljoint")==0){
             joint *jnt = new joint();
+            char jointName[256];
+            t.GetToken(jointName);
+            jnt->name = jointName;
             jnt -> Load(t);
             AddChild(jnt);
+         
         }
         
         else if(strcmp(temp, "}")==0){
@@ -152,6 +157,11 @@ void joint::ChangeDofY(long value){
 
 void joint::ChangeDofZ(long value){
     this->rotzlimit.ChangeValue(value);
+}
+
+
+string joint::GetName(){
+    return name;
 }
 
 joint::~joint(){

@@ -232,6 +232,7 @@ void Window::changeDof(long value){
 // helper to selectJoint
 void Window::selectJoint(int xyz){
     xyzChoice = xyz;
+    
 }
 
 
@@ -259,14 +260,17 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 
             case GLFW_KEY_X:
                 selectJoint(0);
+                std::cout<<"Switching to change dof x value" << std::endl;
                 break;
                 
             case GLFW_KEY_Y:
                 selectJoint(1);
+                std::cout<<"Switching to change dof y value" << std::endl;
                 break;
                 
             case GLFW_KEY_Z:
                 selectJoint(2);
+                std::cout<<"Switching to change dof z value" << std::endl;
                 break;
             
             case GLFW_KEY_RIGHT:
@@ -276,7 +280,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     currentJointIndex++;
                 }
                 
-                //std::cout << jointGroup.size() << std::endl;
+                std::cout << "Switching to " << jointGroup[currentJointIndex]->GetName() << std::endl;
                 break;
                 
             case GLFW_KEY_LEFT:
@@ -287,18 +291,33 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     currentJointIndex--;
                 }
                 
-                //std::cout << currentJointIndex;
-
+                std::cout << "Now at " << jointGroup[currentJointIndex]->GetName() << std::endl;
+                
                 break;
             
             case GLFW_KEY_UP:
                 
-                changeDof(20);
-                //std::cout << jointGroup.size();
+                changeDof(10);
+                std::cout << "Now increasing "<<jointGroup[currentJointIndex]->GetName() << "'s ";
+                if(xyzChoice == 0){
+                    std::cout << "dof x value." << std::endl;
+                } else if(xyzChoice == 1){
+                    std::cout << "dof y value." << std::endl;
+                } else {
+                    std::cout << "dof z value." << std::endl;
+                }
                 break;
             
             case GLFW_KEY_DOWN:
-                changeDof(-20);
+                changeDof(-10);
+                std::cout << "Now decreasing "<<jointGroup[currentJointIndex]->GetName() << "'s ";
+                if(xyzChoice == 0){
+                    std::cout << "dof x value." << std::endl;
+                } else if(xyzChoice == 1){
+                    std::cout << "dof y value." << std::endl;
+                } else {
+                    std::cout << "dof z value." << std::endl;
+                }
                 break;
             
             
