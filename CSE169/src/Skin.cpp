@@ -218,6 +218,8 @@ void Skin::Draw(const glm::mat4& viewProjMtx, GLuint shader){
     light[0] = glm::vec3(1,0,0);
     light[1] = glm::vec3(0,0,1);
      */
+    glEnable(GL_BLEND);
+
     glUseProgram(shader);
 
     // get the locations and send the uniforms to the shader
@@ -225,14 +227,7 @@ void Skin::Draw(const glm::mat4& viewProjMtx, GLuint shader){
     glUniformMatrix4fv(glGetUniformLocation(shader, "model"), 1, GL_FALSE, (float*)&model);
     glUniform3fv(glGetUniformLocation(shader, "DiffuseColor"), 1, &color[0]);
     
-    //glUniform3fv(glGetUniformLocation(shader, "LightDirection"), 2, &(dir[0][0]));
-    //glUniform3fv(glGetUniformLocation(shader, "LightColor"), 2, &(light[0][0]));
 
-
-
-
-    
-    
     // Bind the VAO
     glBindVertexArray(VAO);
 
@@ -242,4 +237,12 @@ void Skin::Draw(const glm::mat4& viewProjMtx, GLuint shader){
     // Unbind the VAO and shader program
     glBindVertexArray(0);
     glUseProgram(0);
+}
+
+Skin::~Skin(){
+    // Delete the VBOs and the VAO.
+    glDeleteBuffers(1, &VBO_positions);
+    glDeleteBuffers(1, &VBO_normals);
+    glDeleteBuffers(1, &EBO);
+    glDeleteVertexArrays(1, &VAO);
 }
