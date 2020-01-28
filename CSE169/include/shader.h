@@ -1,5 +1,7 @@
 #ifndef SHADER_HPP
 #define SHADER_HPP
+#define GL_SILENCE_DEPRECATION
+
 
 #ifdef __APPLE__
 #include <OpenGL/gl3.h>
