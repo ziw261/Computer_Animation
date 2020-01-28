@@ -1,5 +1,7 @@
 #ifndef _CUBE_H_
 #define _CUBE_H_
+#define GL_SILENCE_DEPRECATION
+
 
 #include "core.h"
 

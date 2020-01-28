@@ -180,6 +180,7 @@ dependencies: /Users/aki/GitHub/CSE169_Animation/CSE169/src/Camera.cpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/vector3.h \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/matrix34.h \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/Tokenizer.h \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Skin.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/euler_angles.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/euler_angles.inl \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/compatibility.hpp \

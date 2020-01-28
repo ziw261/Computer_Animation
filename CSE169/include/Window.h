@@ -6,6 +6,7 @@
 #include "shader.h"
 #include "Camera.h"
 #include "skeleton.hpp"
+#include "Skin.hpp"
 #include <iostream>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -29,6 +30,9 @@ public:
     
     // Skeleton to render
     static Skeleton* mainSkeleton;
+    
+    // Skin to render
+    static Skin* mainSkin;
     
 	// Shader Program 
 	static GLuint shaderProgram;

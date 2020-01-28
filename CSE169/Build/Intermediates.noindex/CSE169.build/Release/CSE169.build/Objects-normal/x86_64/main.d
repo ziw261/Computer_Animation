@@ -179,4 +179,5 @@ dependencies: /Users/aki/GitHub/CSE169_Animation/CSE169/src/main.cpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/dof.hpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/vector3.h \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/matrix34.h \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Tokenizer.h
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Tokenizer.h \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Skin.hpp

@@ -170,4 +170,8 @@ dependencies: /Users/aki/GitHub/CSE169_Animation/CSE169/src/Skin.cpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../matrix.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/transform.inl \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/matrix34.h \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/vector3.h
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/vector3.h \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/skeleton.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/joint.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/dof.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Cube.h

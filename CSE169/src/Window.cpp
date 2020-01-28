@@ -14,7 +14,7 @@ const char* Window::windowTitle = "CSE 169 Starter";
 // Objects to render
 Cube * Window::cube;
 Skeleton * Window::mainSkeleton;
-
+Skin* Window::mainSkin;
 
 // Joint selection Properties
 int Window::currentJointIndex = 0;
@@ -62,10 +62,16 @@ bool Window::initializeObjects(int argc,char **argv)
         mainSkeleton->Load(argv[1]);
         //std::cout << fname << std::endl;
     }
+    
+    
+    // Get all the joints in the mainSkeleton
     jointGroup = mainSkeleton->GetJointGroup();
-
+    
+    
+    mainSkin = new Skin(jointGroup);
+    mainSkin->Start("wasp_smooth.skin");
     //mainSkeleton->Start();
-	//cube = new Cube(glm::vec3(-1, 0, -2), glm::vec3(1, 1, 1));
+	cube = new Cube(glm::vec3(-1, 0, -2), glm::vec3(1, 1, 1));
 
 	return true;
 }
@@ -171,7 +177,7 @@ void Window::idleCallback()
 	Cam->Update();
     
     mainSkeleton->Update();
-
+    mainSkin->Update();
 	//cube->update();
     
 }
@@ -185,8 +191,9 @@ void Window::displayCallback(GLFWwindow* window)
     
 	// Render the object.
 	//cube->draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
-    mainSkeleton->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
-    
+    //mainSkeleton->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
+    mainSkin->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
+
 	// Gets events, including input such as keyboard and mouse or window resizing.
 	glfwPollEvents();
 	// Swap buffers.

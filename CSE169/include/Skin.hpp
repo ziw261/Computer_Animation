@@ -8,6 +8,8 @@
 
 #ifndef Skin_hpp
 #define Skin_hpp
+#define GL_SILENCE_DEPRECATION
+
 
 #include <stdio.h>
 #include "Tokenizer.h"
@@ -15,6 +17,8 @@
 #include <iostream>
 #include "matrix34.h"
 #include "vector3.h"
+#include "skeleton.hpp"
+#include "core.h"
 
 
 using namespace std;
@@ -24,21 +28,29 @@ class Skin{
 public:
     
     // Member Variables
-    vector<Vector3> vertices;
-    vector<Vector3> normals;
+    GLuint VAO;
+    GLuint VBO_positions, VBO_normals, EBO;
+    vector<glm::vec3> vertices;
+    vector<glm::vec3> vertices_ac;
+    vector<glm::vec3> normals;
+    vector<glm::vec3> normals_ac;
     vector<int> triangles;
     vector<vector<pair<int,float>>> skinweights;
     vector<glm::mat4> bindings;
-    
+    vector<joint*> jointGroup;
+
     
     
     // Methods
     Skin();
+    Skin(vector<joint*> joints);
     ~Skin();
     bool Load(const char* fname);
     void Update();
-    void Draw();
+    void Draw(const glm::mat4& viewProjMtx, GLuint shader);
     void SkinSmoothAlg();
+    void Start(const char* fname);
+    void DrawSetting();
     
 };
 
