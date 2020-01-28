@@ -12,11 +12,12 @@ uniform mat4 model;
 // The default output, gl_Position, should be assigned something. 
 //out vec3 fragPosition;
 //out vec3 fragNormal;
-out TData
-{
-    vec3 fragPosition;
-    vec3 fragNormal;
-} outData;
+//out TData
+//{
+ //   vec3 fragPosition;
+ //   vec3 fragNormal;
+//} outData;
+out vec3 fragNormal;
 
 void main()
 {
@@ -24,8 +25,6 @@ void main()
     gl_Position = viewProj * model * vec4(position, 1.0);
 
     // for shading
-    //fragPosition = vec3(model * vec4(position, 1));
-	//fragNormal = vec3(model * vec4(normal, 0));
-    outData.fragPosition = vec3(model * vec4(position, 1));
-    outData.fragNormal = vec3(model * vec4(normal, 0));
+    //outData.fragPosition = vec3(model * vec4(position, 1));
+    fragNormal = vec3(model * vec4(normal, 0));
 }

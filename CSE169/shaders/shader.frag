@@ -6,11 +6,13 @@
 //in vec3 fragPosition;
 //in vec3 fragNormal;
 
-in TData
-{
-    vec3 fragPosition;
-    vec3 fragNormal;
-} inData;
+//in TData
+//{
+//    vec3 fragPosition;
+//    vec3 fragNormal;
+//} inData;
+in vec3 fragNormal;
+
 
 // uniforms used for lighting
 uniform vec3 AmbientColor = vec3(0.2);
@@ -27,13 +29,11 @@ void main()
     
     vec3 reflectance;
     vec3 reflectance2;
-    //vec3 reflectance2;
-    //vec3 reflected;
     vec3 result;
     
-    reflectance = (AmbientColor + LightColor[0] * max(0, dot(LightDirection[0], inData.fragNormal))) * DiffuseColor;
+    reflectance = (AmbientColor + LightColor[0] * max(0, dot(LightDirection[0], fragNormal))) * DiffuseColor;
         
-    reflectance2 = (AmbientColor + LightColor[1] * max(0, dot(LightDirection[1], inData.fragNormal))) * DiffuseColor;
+    reflectance2 = (AmbientColor + LightColor[1] * max(0, dot(LightDirection[1], fragNormal))) * DiffuseColor;
         
     result = reflectance + reflectance2;
    

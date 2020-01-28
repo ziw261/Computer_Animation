@@ -54,7 +54,7 @@ public:
 	static void resetCamera();
 
     // helper to change dof
-    static void changeDof(long value);
+    static void changeDof(float value);
     
     // helper to select joint
     static void selectJoint(int xyz);

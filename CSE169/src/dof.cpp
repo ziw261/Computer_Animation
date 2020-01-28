@@ -49,7 +49,7 @@ float dof::GetMax(){
     return this->max;
 }
 
-void dof::ChangeValue(long value){
+void dof::ChangeValue(float value){
     this->value += value;
     if(this->value > max){
         this->value = max;

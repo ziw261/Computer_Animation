@@ -29,7 +29,7 @@ public:
     void SetMax(float max);
     float GetMin();
     float GetMax();
-    void ChangeValue(long value);
+    void ChangeValue(float value);
     void AdjustValue();
     ~dof();
 };

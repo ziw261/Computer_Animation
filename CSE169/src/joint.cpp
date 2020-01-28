@@ -147,15 +147,15 @@ bool joint::HasChildren(){
     }
 }
 
-void joint::ChangeDofX(long value){
+void joint::ChangeDofX(float value){
     this->rotxlimit.ChangeValue(value);
 }
 
-void joint::ChangeDofY(long value){
+void joint::ChangeDofY(float value){
     this->rotylimit.ChangeValue(value);
 }
 
-void joint::ChangeDofZ(long value){
+void joint::ChangeDofZ(float value){
     this->rotzlimit.ChangeValue(value);
 }
 

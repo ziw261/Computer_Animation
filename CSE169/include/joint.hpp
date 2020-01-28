@@ -50,9 +50,9 @@ public:
     //Matrix34* AdjustPose();
     Matrix34 GetWorldMatrix();
     bool HasChildren();
-    void ChangeDofX(long value);
-    void ChangeDofY(long value);
-    void ChangeDofZ(long value);
+    void ChangeDofX(float value);
+    void ChangeDofY(float value);
+    void ChangeDofZ(float value);
     ~joint();
     
 };

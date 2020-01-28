@@ -56,22 +56,27 @@ bool Window::initializeObjects(int argc,char **argv)
 	// Create a cube
 	cube = new Cube();
     mainSkeleton = new Skeleton();
+    
     if(argc == 1) {
-        mainSkeleton->Load("test.skel");
-    } else {
+        mainSkeleton->Load("wasp.skel");
+    } else{
         mainSkeleton->Load(argv[1]);
-        //std::cout << fname << std::endl;
+        //std::cout << argc << std::endl;
     }
     
     
     // Get all the joints in the mainSkeleton
     jointGroup = mainSkeleton->GetJointGroup();
     
-    
     mainSkin = new Skin(jointGroup);
-    mainSkin->Start("wasp_smooth.skin");
+    
+
+    //mainSkin->Start("wasp_smooth.skin");
+    if(argc == 1){
+        mainSkin->Start("wasp_smooth.skin");
+    }
     //mainSkeleton->Start();
-	cube = new Cube(glm::vec3(-1, 0, -2), glm::vec3(1, 1, 1));
+	//cube = new Cube(glm::vec3(-1, 0, -2), glm::vec3(1, 1, 1));
 
 	return true;
 }
@@ -211,7 +216,7 @@ void Window::resetCamera()
 
 
 // helper to change dof
-void Window::changeDof(long value){
+void Window::changeDof(float value){
     switch (xyzChoice) {
         case 0:
             jointGroup[currentJointIndex]->ChangeDofX(value);
@@ -297,7 +302,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
             
             case GLFW_KEY_UP:
                 
-                changeDof(10);
+                changeDof(0.2);
                 std::cout << "Now increasing "<<jointGroup[currentJointIndex]->GetName() << "'s ";
                 if(xyzChoice == 0){
                     std::cout << "dof x value." << std::endl;
@@ -309,7 +314,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 break;
             
             case GLFW_KEY_DOWN:
-                changeDof(-10);
+                changeDof(-0.2);
                 std::cout << "Now decreasing "<<jointGroup[currentJointIndex]->GetName() << "'s ";
                 if(xyzChoice == 0){
                     std::cout << "dof x value." << std::endl;
@@ -319,7 +324,6 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     std::cout << "dof z value." << std::endl;
                 }
                 break;
-            
             
 
             default:
