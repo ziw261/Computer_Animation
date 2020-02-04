@@ -38,6 +38,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6125CA4523E38FE9000C6E10 /* wasp_smooth.skin */ = {isa = PBXFileReference; lastKnownFileType = text; name = wasp_smooth.skin; path = Build/Products/Release/wasp_smooth.skin; sourceTree = SOURCE_ROOT; };
 		61E1692123DAB20F001F8FF2 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		61E1692323DAB218001F8FF2 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		61E1692523DAB237001F8FF2 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../../usr/local/Cellar/glfw/3.3.1/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
@@ -74,6 +75,8 @@
 		61E1695D23DEB014001F8FF2 /* Skin.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Skin.hpp; sourceTree = "<group>"; };
 		61E1696423DF7733001F8FF2 /* Readme */ = {isa = PBXFileReference; lastKnownFileType = text; path = Readme; sourceTree = "<group>"; };
 		61E1696523DF77AF001F8FF2 /* CSE169 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CSE169; sourceTree = BUILT_PRODUCTS_DIR; };
+		61E6AE1923EA2A4B00F8B7FF /* wasp.skin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wasp.skin; sourceTree = "<group>"; };
+		61E6AE1A23EA2A4B00F8B7FF /* tube_smooth.skin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tube_smooth.skin; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6125CA4323E38FC6000C6E10 /* skin */ = {
+			isa = PBXGroup;
+			children = (
+				61E6AE1A23EA2A4B00F8B7FF /* tube_smooth.skin */,
+				61E6AE1923EA2A4B00F8B7FF /* wasp.skin */,
+				6125CA4523E38FE9000C6E10 /* wasp_smooth.skin */,
+			);
+			path = skin;
+			sourceTree = "<group>";
+		};
 		61E168F623DAB16D001F8FF2 = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +177,7 @@
 		61E1695223DD2A7C001F8FF2 /* install */ = {
 			isa = PBXGroup;
 			children = (
+				6125CA4323E38FC6000C6E10 /* skin */,
 				61E1695323DD2A9E001F8FF2 /* skeleton */,
 			);
 			path = install;

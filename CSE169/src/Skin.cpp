@@ -85,7 +85,7 @@ bool Skin::Load(const char* fname){
             int numBind = t.GetInt();
             t.FindToken("{");
             for(int i=0; i<numBind; i++){
-                glm::mat4 tempMat = glm::mat4(1.0f);
+                glm::mat4 tempMat = glm::mat4(0.0f);
                 
                 t.FindToken("{");
                 for(int j=0; j<4; j++){

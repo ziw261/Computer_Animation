@@ -16,7 +16,7 @@ in vec3 fragNormal;
 
 // uniforms used for lighting
 uniform vec3 AmbientColor = vec3(0.2);
-uniform vec3 LightDirection[2] = vec3[2](vec3(0,0,10), vec3(0,0,-10));
+uniform vec3 LightDirection[2] = vec3[2](vec3(0,0,1), vec3(0,0,-1));
 uniform vec3 LightColor[2] = vec3[2](vec3(0,0,1), vec3(1,0,0));
 uniform vec3 DiffuseColor;	// passed in from c++ side NOTE: you can also set the value here and then remove 
 							// color from the c++ side

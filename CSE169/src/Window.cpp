@@ -73,7 +73,9 @@ bool Window::initializeObjects(int argc,char **argv)
 
     //mainSkin->Start("wasp_smooth.skin");
     if(argc == 1){
-        mainSkin->Start("wasp_smooth.skin");
+        mainSkin->Start("wasp.skin");
+    } else {
+        mainSkin->Start(argv[2]);
     }
     //mainSkeleton->Start();
 	//cube = new Cube(glm::vec3(-1, 0, -2), glm::vec3(1, 1, 1));

@@ -56,15 +56,11 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "test.skel"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "wasp.skin"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
             argument = "tube.skel"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "test.skel"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
@@ -73,6 +69,14 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "dragon.skel"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "wasp.skin"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "tube_smooth.skin"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
