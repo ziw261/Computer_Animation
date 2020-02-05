@@ -53,7 +53,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "wasp.skel"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "tube.skel"
@@ -73,10 +73,14 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "wasp.skin"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "tube_smooth.skin"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "wasp_smooth.skel"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>

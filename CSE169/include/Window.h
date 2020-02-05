@@ -1,5 +1,8 @@
 #ifndef _WINDOW_H_
 #define _WINDOW_H_
+#define GL_SILENCE_DEPRECATION
+
+
 
 #include "main.h"
 #include "Cube.h"

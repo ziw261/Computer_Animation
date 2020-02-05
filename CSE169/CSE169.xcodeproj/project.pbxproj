@@ -22,6 +22,8 @@
 		61E1695023DB9341001F8FF2 /* skeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61E1694B23DB9341001F8FF2 /* skeleton.cpp */; };
 		61E1695123DB9341001F8FF2 /* dof.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61E1694C23DB9341001F8FF2 /* dof.cpp */; };
 		61E1695E23DEB014001F8FF2 /* Skin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61E1695C23DEB014001F8FF2 /* Skin.cpp */; };
+		61E6AE1D23EA2B2000F8B7FF /* Keyframe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61E6AE1B23EA2B2000F8B7FF /* Keyframe.cpp */; };
+		61E6AE2023EA37EE00F8B7FF /* Channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61E6AE1E23EA37EE00F8B7FF /* Channel.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -77,6 +79,10 @@
 		61E1696523DF77AF001F8FF2 /* CSE169 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CSE169; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E6AE1923EA2A4B00F8B7FF /* wasp.skin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wasp.skin; sourceTree = "<group>"; };
 		61E6AE1A23EA2A4B00F8B7FF /* tube_smooth.skin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tube_smooth.skin; sourceTree = "<group>"; };
+		61E6AE1B23EA2B2000F8B7FF /* Keyframe.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Keyframe.cpp; sourceTree = "<group>"; };
+		61E6AE1C23EA2B2000F8B7FF /* Keyframe.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Keyframe.hpp; sourceTree = "<group>"; };
+		61E6AE1E23EA37EE00F8B7FF /* Channel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Channel.cpp; sourceTree = "<group>"; };
+		61E6AE1F23EA37EE00F8B7FF /* Channel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Channel.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +157,8 @@
 				61E1692923DAB78C001F8FF2 /* Tokenizer.h */,
 				61E1692A23DAB78D001F8FF2 /* Window.h */,
 				61E1695D23DEB014001F8FF2 /* Skin.hpp */,
+				61E6AE1C23EA2B2000F8B7FF /* Keyframe.hpp */,
+				61E6AE1F23EA37EE00F8B7FF /* Channel.hpp */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -170,6 +178,8 @@
 				61E1693123DAB78D001F8FF2 /* Tokenizer.cpp */,
 				61E1693223DAB78D001F8FF2 /* Window.cpp */,
 				61E1695C23DEB014001F8FF2 /* Skin.cpp */,
+				61E6AE1B23EA2B2000F8B7FF /* Keyframe.cpp */,
+				61E6AE1E23EA37EE00F8B7FF /* Channel.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -254,6 +264,7 @@
 				61E1693B23DAB78D001F8FF2 /* Tokenizer.cpp in Sources */,
 				61E1694E23DB9341001F8FF2 /* matrix34.cpp in Sources */,
 				61E1695023DB9341001F8FF2 /* skeleton.cpp in Sources */,
+				61E6AE1D23EA2B2000F8B7FF /* Keyframe.cpp in Sources */,
 				61E1694D23DB9341001F8FF2 /* joint.cpp in Sources */,
 				61E1693A23DAB78D001F8FF2 /* main.cpp in Sources */,
 				61E1694F23DB9341001F8FF2 /* vector3.cpp in Sources */,
@@ -263,6 +274,7 @@
 				61E1695123DB9341001F8FF2 /* dof.cpp in Sources */,
 				61E1693E23DAB78D001F8FF2 /* Camera.cpp in Sources */,
 				61E1693D23DAB78D001F8FF2 /* Cube.cpp in Sources */,
+				61E6AE2023EA37EE00F8B7FF /* Channel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
