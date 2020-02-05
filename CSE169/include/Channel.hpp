@@ -30,6 +30,10 @@ public:
     Channel(float s, float e);
     bool Load(Tokenizer &t);
     void TangentCalc();
+    void CubicCoeffCalc();
+    void Precompute();
+    float Evaluate(float currTime);
+    int BinaryS(float currTime, int left, int right);
     ~Channel();
     
     
