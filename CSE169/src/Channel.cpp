@@ -135,6 +135,59 @@ void Channel::Precompute(){
 }
 
 
+float Channel::Extrapolate(int currTime, int choose){
+    
+    switch (choose) {
+        
+        case 0:
+            if(strcpy(extrapIn,"constant") == 0){
+                return keys[0]->value;
+            }
+            else if(strcpy(extrapIn, "linear") == 0){
+                return keys[0]->value-(keys[0]->tangentOut * (keys[0]->time-currTime));
+            }
+            else if(strcpy(extrapIn, "cycle") == 0){
+                
+            }
+            else if(strcpy(extrapIn, "cycle_offset") == 0){
+                
+            }
+            else if(strcpy(extrapIn, "bounce")  == 0){
+                
+            }
+            
+            break;
+        
+        case 1:
+            if(strcpy(extrapOut, "constant") == 0){
+                return keys[numKeys-1]->value;
+            }
+            else if(strcpy(extrapOut, "linear") == 0){
+                return keys[numKeys-1]->value + (keys[numKeys-1]->tangentIn * (currTime - keys[numKeys-1]->time));
+            }
+            else if(strcpy(extrapOut, "cycle") == 0){
+                
+            }
+            else if(strcpy(extrapOut, "cycle_offset") == 0){
+                
+            }
+            else if(strcpy(extrapOut, "bounce") == 0){
+                
+            }
+            
+            break;
+        default:
+            
+            break;
+    }
+    
+    
+    
+    
+    return 0;
+}
+
+
 float Channel::Evaluate(float currTime){
     
     // If the currTime is within the span
@@ -148,12 +201,15 @@ float Channel::Evaluate(float currTime){
         return keys[numKeys-1]->value;
     }
     else if(currTime > keys[numKeys-1]->time){
-        
+        return Extrapolate(currTime, 1);
     }
     else if(currTime < keys[0]->time){
-        
+        return Extrapolate(currTime, 0);
     }
-    return 1;
+    
+    cerr << "Should not be here, Error Place: Channel::Evaluate" << endl;
+    return -100;
+
 }
 
 

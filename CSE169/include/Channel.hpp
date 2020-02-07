@@ -34,6 +34,7 @@ public:
     void Precompute();
     float Evaluate(float currTime);
     int BinaryS(float currTime, int left, int right);
+    float Extrapolate(int currTime, int choose);
     ~Channel();
     
     
