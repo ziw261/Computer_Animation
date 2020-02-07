@@ -147,13 +147,14 @@ float Channel::Extrapolate(int currTime, int choose){
                 return keys[0]->value-(keys[0]->tangentOut * (keys[0]->time-currTime));
             }
             else if(strcpy(extrapIn, "cycle") == 0){
-                
+                return Evaluate(keys[numKeys - 1]->time - (keys[0]->time - currTime));
             }
             else if(strcpy(extrapIn, "cycle_offset") == 0){
-                
+                return Evaluate(keys[numKeys - 1]->time - (keys[0]->time - currTime)) - (keys[numKeys -1]->value - keys[0]->value);
+
             }
             else if(strcpy(extrapIn, "bounce")  == 0){
-                
+                return Evaluate(keys[0]->time - currTime + keys[0]->time);
             }
             
             break;
@@ -166,25 +167,31 @@ float Channel::Extrapolate(int currTime, int choose){
                 return keys[numKeys-1]->value + (keys[numKeys-1]->tangentIn * (currTime - keys[numKeys-1]->time));
             }
             else if(strcpy(extrapOut, "cycle") == 0){
-                
+                return Evaluate(currTime-keys[numKeys-1]->time+keys[0]->time);
             }
             else if(strcpy(extrapOut, "cycle_offset") == 0){
-                
+                return Evaluate(currTime-keys[numKeys-1]->time+keys[0]->time) + (keys[numKeys-1]->value - keys[0]->value);
             }
             else if(strcpy(extrapOut, "bounce") == 0){
-                
+                return Evaluate(keys[numKeys-1]->time - (currTime-keys[numKeys-1]->time));
             }
             
             break;
+            
         default:
             
+            cerr << "Error Extrapolate case, should not be here!" << endl;
             break;
     }
     
-    
-    
-    
-    return 0;
+    cerr << "Error Extrapolate, should not be here!" << endl;
+    return -100;
+}
+
+float Channel::FinalCalc(int index, float currTime){
+    float u = (currTime - keys[index]->time)/(keys[index+1]->time - keys[index]->time);
+    float x = keys[index]->d + u*(keys[index]->c + u*(keys[index]->b + u*keys[index]->a));
+    return x;
 }
 
 
@@ -192,7 +199,8 @@ float Channel::Evaluate(float currTime){
     
     // If the currTime is within the span
     if(currTime > keys[0]->time && currTime < keys[numKeys-1]->time){
-        BinaryS(currTime, 0, numKeys);
+        int index = BinaryS(currTime, 0, numKeys);
+        return FinalCalc(index,currTime);
     }
     else if(currTime == keys[0]->time){
         return keys[0]->value;
