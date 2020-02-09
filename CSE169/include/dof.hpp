@@ -15,11 +15,12 @@
 class dof {
 
 private:
+
+
+public:
     float value = 0;
     float min = -100000;
     float max = 100000;
-
-public:
     dof();
     dof(float a, float b);
     void SetValue(float value);

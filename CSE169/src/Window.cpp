@@ -15,6 +15,10 @@ const char* Window::windowTitle = "CSE 169 Starter";
 Cube * Window::cube;
 Skeleton * Window::mainSkeleton;
 Skin* Window::mainSkin;
+AnimationClip* Window::mainAnimation;
+
+float Window::startTime;
+float Window::currentTime;
 
 // Joint selection Properties
 int Window::currentJointIndex = 0;
@@ -76,6 +80,14 @@ bool Window::initializeObjects(int argc,char **argv)
         mainSkin->Start("wasp.skin");
     } else {
         mainSkin->Start(argv[2]);
+    }
+    
+    mainAnimation = new AnimationClip(jointGroup);
+    
+    if(argc == 1){
+        startTime = clock();
+        mainAnimation->Load("wasp_walk.anim");
+        //mainAnimation->EvaluateAll(0);
     }
     //mainSkeleton->Start();
 	//cube = new Cube(glm::vec3(-1, 0, -2), glm::vec3(1, 1, 1));
@@ -180,11 +192,19 @@ void Window::resizeCallback(GLFWwindow* window, int width, int height)
 // update and draw functions
 void Window::idleCallback()
 {
+    
+    //currentTime = (float)(clock()-startTime)/CLOCKS_PER_SEC;  //1000000
+    currentTime = (float)(clock()-startTime)/500000;  //1000000
+
 	// Perform any updates as necessary. 
 	Cam->Update();
     
     mainSkeleton->Update();
     mainSkin->Update();
+    mainAnimation->Update(currentTime);
+
+    //cerr<<mainAnimation->channels[3]->extrapOut<<endl;
+    //cerr << currentTime << endl;
 	//cube->update();
     
 }
@@ -199,6 +219,7 @@ void Window::displayCallback(GLFWwindow* window)
 	// Render the object.
 	//cube->draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
     //mainSkeleton->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
+
     mainSkin->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
 
 	// Gets events, including input such as keyboard and mouse or window resizing.

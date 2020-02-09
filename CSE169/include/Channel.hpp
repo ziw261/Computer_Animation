@@ -33,8 +33,6 @@ public:
     void CubicCoeffCalc();
     void Precompute();
     float Evaluate(float currTime);
-    int BinaryS(float currTime, int left, int right);
-    float Extrapolate(int currTime, int choose);
     float FinalCalc(int index, float currTime);
     ~Channel();
     

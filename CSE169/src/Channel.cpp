@@ -54,14 +54,18 @@ bool Channel::Load(Tokenizer &t){
 
 void Channel::TangentCalc(){
     
+    if(numKeys == 1){
+        return;
+    }
+    
     for(int i=0; i<numKeys; i++){
         
         // Calculation of Tangent Rule In
-        if(strcmp(keys[i]->ruleIn, "flat")){
+        if(strcmp(keys[i]->ruleIn, "flat") == 0){
             keys[i]->tangentIn = 0.0;
         }
         
-        else if(strcmp(keys[i]->ruleIn, "linear")){
+        else if(strcmp(keys[i]->ruleIn, "linear") == 0){
             
             // First key
             if(i == 0){
@@ -71,7 +75,7 @@ void Channel::TangentCalc(){
             }
         }
         
-        else if(strcmp(keys[i]->ruleIn, "smooth")){
+        else if(strcmp(keys[i]->ruleIn, "smooth") == 0){
             if(i == 0){
                 keys[i]->tangentIn = 0;
             } else if( i == numKeys-1){
@@ -87,11 +91,11 @@ void Channel::TangentCalc(){
         
         
         // Calculation of Tangent Rule Out
-        if(strcmp(keys[i]->ruleOut, "flat")){
+        if(strcmp(keys[i]->ruleOut, "flat") == 0){
             keys[i]->tangentOut = 0.0;
         }
         
-        else if(strcmp(keys[i]->ruleOut, "linear")){
+        else if(strcmp(keys[i]->ruleOut, "linear") == 0){
             if(i == numKeys-1){
                 keys[i]->tangentOut = 0;
             } else {
@@ -99,7 +103,7 @@ void Channel::TangentCalc(){
             }
         }
         
-        else if(strcmp(keys[i]->ruleOut, "smooth")){
+        else if(strcmp(keys[i]->ruleOut, "smooth") == 0){
             if(i == 0){
                 keys[i]->tangentOut = (keys[i+1]->value - keys[i]->value)/(keys[i+1]->time - keys[i]->time);
             } else if( i == numKeys-1){
@@ -120,7 +124,7 @@ void Channel::CubicCoeffCalc(){
     glm::mat4 temp = glm::mat4(2,-3,0,1,-2,3,0,0,1,-2,1,0,1,-1,0,0);
     
     for(int i=0; i<(numKeys-1); i++){
-        glm::vec4 temp2 = glm::vec4(keys[i]->value, keys[i+1]->value, (keys[i+1]->time - keys[i]->time) * keys[i]->tangentOut, (keys[i+1]->time - keys[i]->time) * keys[i+1]->tangentOut);
+        glm::vec4 temp2 = glm::vec4(keys[i]->value, keys[i+1]->value, (keys[i+1]->time - keys[i]->time) * keys[i]->tangentOut, (keys[i+1]->time - keys[i]->time) * keys[i+1]->tangentIn);
         glm::vec4 result = temp * temp2;
         keys[i]->a = result[0];
         keys[i]->b = result[1];
@@ -133,61 +137,7 @@ void Channel::Precompute(){
     TangentCalc();
     CubicCoeffCalc();
 }
-
-
-float Channel::Extrapolate(int currTime, int choose){
-    
-    switch (choose) {
-        
-        case 0:
-            if(strcpy(extrapIn,"constant") == 0){
-                return keys[0]->value;
-            }
-            else if(strcpy(extrapIn, "linear") == 0){
-                return keys[0]->value-(keys[0]->tangentOut * (keys[0]->time-currTime));
-            }
-            else if(strcpy(extrapIn, "cycle") == 0){
-                return Evaluate(keys[numKeys - 1]->time - (keys[0]->time - currTime));
-            }
-            else if(strcpy(extrapIn, "cycle_offset") == 0){
-                return Evaluate(keys[numKeys - 1]->time - (keys[0]->time - currTime)) - (keys[numKeys -1]->value - keys[0]->value);
-
-            }
-            else if(strcpy(extrapIn, "bounce")  == 0){
-                return Evaluate(keys[0]->time - currTime + keys[0]->time);
-            }
-            
-            break;
-        
-        case 1:
-            if(strcpy(extrapOut, "constant") == 0){
-                return keys[numKeys-1]->value;
-            }
-            else if(strcpy(extrapOut, "linear") == 0){
-                return keys[numKeys-1]->value + (keys[numKeys-1]->tangentIn * (currTime - keys[numKeys-1]->time));
-            }
-            else if(strcpy(extrapOut, "cycle") == 0){
-                return Evaluate(currTime-keys[numKeys-1]->time+keys[0]->time);
-            }
-            else if(strcpy(extrapOut, "cycle_offset") == 0){
-                return Evaluate(currTime-keys[numKeys-1]->time+keys[0]->time) + (keys[numKeys-1]->value - keys[0]->value);
-            }
-            else if(strcpy(extrapOut, "bounce") == 0){
-                return Evaluate(keys[numKeys-1]->time - (currTime-keys[numKeys-1]->time));
-            }
-            
-            break;
-            
-        default:
-            
-            cerr << "Error Extrapolate case, should not be here!" << endl;
-            break;
-    }
-    
-    cerr << "Error Extrapolate, should not be here!" << endl;
-    return -100;
-}
-
+ 
 float Channel::FinalCalc(int index, float currTime){
     float u = (currTime - keys[index]->time)/(keys[index+1]->time - keys[index]->time);
     float x = keys[index]->d + u*(keys[index]->c + u*(keys[index]->b + u*keys[index]->a));
@@ -195,51 +145,70 @@ float Channel::FinalCalc(int index, float currTime){
 }
 
 
-float Channel::Evaluate(float currTime){
-    
-    // If the currTime is within the span
-    if(currTime > keys[0]->time && currTime < keys[numKeys-1]->time){
-        int index = BinaryS(currTime, 0, numKeys);
-        return FinalCalc(index,currTime);
+float Channel::Evaluate(float time){
+    if(time < keys[0]->time){
+        //Extrapolate(time, 0);
+        if(strcmp(extrapIn, "constant") == 0){
+            return keys[0]->value;
+        }
+        else if(strcmp(extrapIn, "linear") == 0){
+            return keys[0]->value - (keys[0]->time - time)*keys[0]->tangentOut;
+        }
+        else if(strcmp(extrapIn, "cycle") == 0){
+            return Evaluate(keys[numKeys-1]->time - keys[0]->time + time);
+        }
+        else if(strcmp(extrapIn, "cycle_offset") == 0){
+            return Evaluate(keys[numKeys-1]->time - keys[0]->time + time) - (keys[numKeys-1]->value - keys[0]->value);
+        }
+        else if(strcmp(extrapIn, "bounce") == 0){
+            return Evaluate(keys[0]->time + keys[0]->time - time);
+        }
     }
-    else if(currTime == keys[0]->time){
+    else if(time > keys[numKeys-1]->time){
+        //Extrapolate(time, 1);
+        if(strcmp(extrapOut, "constant") == 0){
+            return keys[numKeys-1]->value;
+        }
+        else if(strcmp(extrapOut, "linear") == 0){
+            return keys[numKeys-1]->value + (time - keys[numKeys-1]->time)*keys[numKeys-1]->tangentIn;
+        }
+        else if(strcmp(extrapOut, "cycle") == 0){
+            return Evaluate(keys[0]->time + time - keys[numKeys-1]->time);
+        }
+        else if(strcmp(extrapOut,"cycle_offset") == 0){
+            return Evaluate(keys[0]->time + time - keys[numKeys-1]->time) + (keys[numKeys-1]->value - keys[0]->value);
+        }
+        else if(strcmp(extrapOut, "bounce") == 0){
+            return Evaluate(keys[numKeys-1]->time - time + keys[numKeys-1]->time);
+        }
+    }
+    else if(numKeys > 1){
+        int i;
+        for(i=0; i<numKeys-1; i++){
+            if(time == keys[i]->time){
+                return keys[i]->value;
+            }
+            else if(time == keys[i+1]->time){
+                return keys[i+1]->value;
+            }
+            else if(time > keys[i]->time && time < keys[i+1]->time){
+                break;
+            }
+            else {
+                continue;
+            }
+        }
+        return FinalCalc(i, time);
+    }
+    else if(numKeys == 1){
         return keys[0]->value;
     }
-    else if(currTime == keys[numKeys-1]->time){
-        return keys[numKeys-1]->value;
-    }
-    else if(currTime > keys[numKeys-1]->time){
-        return Extrapolate(currTime, 1);
-    }
-    else if(currTime < keys[0]->time){
-        return Extrapolate(currTime, 0);
-    }
     
-    cerr << "Should not be here, Error Place: Channel::Evaluate" << endl;
     return -100;
 
 }
 
 
-int Channel::BinaryS(float currTime, int left, int right){
-    
-    int mid = (right-left)/2;
-    // Always return the smaller one
-    if(currTime<keys[mid]->time && currTime >keys[mid-1]->time){
-        return mid-1;
-    } else if(currTime>keys[mid]->time && currTime<keys[mid+1]->time){
-        return mid;
-    } else if(currTime == keys[mid]->time){
-        return -1;
-    } else if(currTime>keys[mid]->time) {
-        BinaryS(currTime, mid,right);
-    } else if(currTime<keys[mid]->time) {
-        BinaryS(currTime, left,mid);
-    }
-    
-    cerr << "BinaryS Error, should not be here" << endl;
-    return -100;
-}
 
 
 

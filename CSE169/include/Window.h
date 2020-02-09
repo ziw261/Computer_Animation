@@ -10,7 +10,10 @@
 #include "Camera.h"
 #include "skeleton.hpp"
 #include "Skin.hpp"
+#include "AnimationClip.hpp"
 #include <iostream>
+#include <chrono>
+
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -36,6 +39,14 @@ public:
     
     // Skin to render
     static Skin* mainSkin;
+    
+    // AnimationClip to play
+    static AnimationClip* mainAnimation;
+    
+    
+    //
+    static float startTime;
+    static float currentTime;
     
 	// Shader Program 
 	static GLuint shaderProgram;

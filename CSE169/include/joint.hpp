@@ -29,16 +29,18 @@ private:
     vector<dof*> dofList;
     vector<joint*> children;
     joint *mother;
-    dof rotxlimit;
-    dof rotylimit;
-    dof rotzlimit;
-    Vector3 offset;
+
     Vector3 boxmax;
     Vector3 boxmin;
     string name;
     
     
 public:
+    Vector3 offset;
+    dof rotxlimit;
+    dof rotylimit;
+    dof rotzlimit;
+
     joint();
     void Update(Matrix34 matrix);
     void AddChild(joint* jnt);

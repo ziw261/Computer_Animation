@@ -57,8 +57,7 @@ void dof::ChangeValue(float value){
         this->value = min;
     }
     //std::cout << this->min << std::endl;
-    //std::cout << this->value << std::endl;
-   
+    //std::cout << this->value << std::endl
     
 }
 
