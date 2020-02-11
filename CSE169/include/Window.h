@@ -44,9 +44,12 @@ public:
     static AnimationClip* mainAnimation;
     
     
-    //
+    // Animation Clock
     static float startTime;
     static float currentTime;
+    static bool shouldPause;
+    static float pauseStart;
+    static float pauseEnd;
     
 	// Shader Program 
 	static GLuint shaderProgram;

@@ -19,6 +19,12 @@ AnimationClip* Window::mainAnimation;
 
 float Window::startTime;
 float Window::currentTime;
+float Window::pauseStart;
+float Window::pauseEnd;
+bool Window::shouldPause;
+
+
+
 
 // Joint selection Properties
 int Window::currentJointIndex = 0;
@@ -194,7 +200,9 @@ void Window::idleCallback()
 {
     
     //currentTime = (float)(clock()-startTime)/CLOCKS_PER_SEC;  //1000000
-    currentTime = (float)(clock()-startTime)/500000;  //1000000
+    if(!shouldPause){
+        currentTime = (float)(clock()-startTime)/500000;  //1000000
+    }
 
 	// Perform any updates as necessary. 
 	Cam->Update();
@@ -284,6 +292,20 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
 
             case GLFW_KEY_R:
                 resetCamera();
+                startTime = clock();
+                break;
+            
+            case GLFW_KEY_P:
+                // Pause the animation logic
+                if(!shouldPause){
+                    pauseStart = clock();
+                    shouldPause = true;
+                    
+                } else {
+                    pauseEnd = clock();
+                    startTime += pauseEnd - pauseStart;
+                    shouldPause = false;
+                }
                 break;
                 
             case GLFW_KEY_X:

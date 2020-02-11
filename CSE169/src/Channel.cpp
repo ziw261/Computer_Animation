@@ -182,6 +182,9 @@ float Channel::Evaluate(float time){
             return Evaluate(keys[numKeys-1]->time - time + keys[numKeys-1]->time);
         }
     }
+    else if(numKeys == 1){
+        return keys[0]->value;
+    }
     else if(numKeys > 1){
         int i;
         for(i=0; i<numKeys-1; i++){
@@ -192,18 +195,12 @@ float Channel::Evaluate(float time){
                 return keys[i+1]->value;
             }
             else if(time > keys[i]->time && time < keys[i+1]->time){
-                break;
-            }
-            else {
-                continue;
+                return FinalCalc(i, time);
             }
         }
-        return FinalCalc(i, time);
-    }
-    else if(numKeys == 1){
-        return keys[0]->value;
     }
     
+    cerr << "Error: should not reach here Evaluate" << endl;
     return -100;
 
 }

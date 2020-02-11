@@ -32,6 +32,8 @@ public:
     void TangentCalc();
     void CubicCoeffCalc();
     void Precompute();
+    float extracted(float time);
+    
     float Evaluate(float currTime);
     float FinalCalc(int index, float currTime);
     ~Channel();
