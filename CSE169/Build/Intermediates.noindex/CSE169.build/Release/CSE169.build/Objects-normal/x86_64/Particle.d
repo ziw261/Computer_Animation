@@ -1,6 +1,6 @@
-dependencies: /Users/aki/GitHub/CSE169_Animation/CSE169/src/main.cpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/main.h \
-  /usr/local/Cellar/glfw/3.3.1/include/GLFW/glfw3.h \
+dependencies: /Users/aki/GitHub/CSE169_Animation/CSE169/src/Particle.cpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Particle.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/core.h \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/glm.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/detail/_fixes.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/detail/setup.hpp \
@@ -142,48 +142,29 @@ dependencies: /Users/aki/GitHub/CSE169_Animation/CSE169/src/main.cpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/vector_relational.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/integer.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/detail/func_integer.inl \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/matrix_transform.hpp \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/../mat4x4.hpp \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/../vec2.hpp \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/../vec3.hpp \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/../vec4.hpp \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/../ext/matrix_projection.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/transform.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../glm.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/matrix_transform.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../mat4x4.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../vec2.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../vec3.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../vec4.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../ext/matrix_projection.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/./ext/../gtc/constants.hpp \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/../ext/scalar_constants.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../ext/scalar_constants.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/./ext/scalar_constants.inl \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/constants.inl \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/constants.inl \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/./ext/../geometric.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/./ext/../trigonometric.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/./ext/../matrix.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/./ext/matrix_projection.inl \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/../ext/matrix_clip_space.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../ext/matrix_clip_space.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/./ext/../ext/scalar_constants.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/./ext/matrix_clip_space.inl \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/../ext/matrix_transform.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../ext/matrix_transform.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/./ext/matrix_transform.inl \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/matrix_transform.inl \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/../geometric.hpp \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/../trigonometric.hpp \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtc/../matrix.hpp \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/transform.hpp \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../glm.hpp \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/matrix_transform.hpp \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/transform.inl \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Window.h \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Cube.h \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/core.h \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/shader.h \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Camera.h \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/skeleton.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/joint.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/dof.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/vector3.h \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/matrix34.h \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Tokenizer.h \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Skin.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/AnimationClip.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Channel.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Keyframe.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/ParticleSystem.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Particle.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Triangle.hpp
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/matrix_transform.inl \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../geometric.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../trigonometric.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../matrix.hpp \
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/transform.inl

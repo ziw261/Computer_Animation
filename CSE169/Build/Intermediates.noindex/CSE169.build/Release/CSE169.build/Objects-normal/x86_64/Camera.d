@@ -184,6 +184,9 @@ dependencies: /Users/aki/GitHub/CSE169_Animation/CSE169/src/Camera.cpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/AnimationClip.hpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/Channel.hpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/Keyframe.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/ParticleSystem.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Particle.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Triangle.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/euler_angles.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/euler_angles.inl \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/compatibility.hpp \

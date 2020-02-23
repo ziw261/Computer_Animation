@@ -11,6 +11,7 @@
 #include "skeleton.hpp"
 #include "Skin.hpp"
 #include "AnimationClip.hpp"
+#include "ParticleSystem.hpp"
 #include <iostream>
 #include <chrono>
 
@@ -43,6 +44,8 @@ public:
     // AnimationClip to play
     static AnimationClip* mainAnimation;
     
+    // Cloth
+    static ParticleSystem* mainParticleSystem;
     
     // Animation Clock
     static float startTime;
@@ -50,6 +53,12 @@ public:
     static bool shouldPause;
     static float pauseStart;
     static float pauseEnd;
+    
+    
+    // Switch with Animation/Cloth
+    static int nowLoading;
+    static int loadAnimation;
+    static int loadCloth;
     
 	// Shader Program 
 	static GLuint shaderProgram;

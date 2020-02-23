@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		613A8D6423FF3CE8000E7EA7 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613A8D6223FF3CE8000E7EA7 /* Particle.cpp */; };
+		613A8D6723FF40E8000E7EA7 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613A8D6523FF40E8000E7EA7 /* ParticleSystem.cpp */; };
+		613A8D6A2401E90A000E7EA7 /* Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613A8D682401E90A000E7EA7 /* Triangle.cpp */; };
 		61CF74F123EF3FF7008C4BCE /* AnimationClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61CF74EF23EF3FF7008C4BCE /* AnimationClip.cpp */; };
 		61E1692223DAB20F001F8FF2 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E1692123DAB20F001F8FF2 /* GLUT.framework */; };
 		61E1692423DAB218001F8FF2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E1692323DAB218001F8FF2 /* OpenGL.framework */; };
@@ -42,9 +45,15 @@
 
 /* Begin PBXFileReference section */
 		6125CA4523E38FE9000C6E10 /* wasp_smooth.skin */ = {isa = PBXFileReference; lastKnownFileType = text; name = wasp_smooth.skin; path = Build/Products/Release/wasp_smooth.skin; sourceTree = SOURCE_ROOT; };
+		613A8D6223FF3CE8000E7EA7 /* Particle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
+		613A8D6323FF3CE8000E7EA7 /* Particle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Particle.hpp; sourceTree = "<group>"; };
+		613A8D6523FF40E8000E7EA7 /* ParticleSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleSystem.cpp; sourceTree = "<group>"; };
+		613A8D6623FF40E8000E7EA7 /* ParticleSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleSystem.hpp; sourceTree = "<group>"; };
+		613A8D682401E90A000E7EA7 /* Triangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Triangle.cpp; sourceTree = "<group>"; };
+		613A8D692401E90A000E7EA7 /* Triangle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Triangle.hpp; sourceTree = "<group>"; };
 		61CF74EF23EF3FF7008C4BCE /* AnimationClip.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationClip.cpp; sourceTree = "<group>"; };
 		61CF74F023EF3FF7008C4BCE /* AnimationClip.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AnimationClip.hpp; sourceTree = "<group>"; };
-		61CF74F323EF539D008C4BCE /* wasp_walk.anim */ = {isa = PBXFileReference; lastKnownFileType = file; name = wasp_walk.anim; path = Build/Products/Release/wasp_walk.anim; sourceTree = SOURCE_ROOT; };
+		61CF74F323EF539D008C4BCE /* wasp_walk.anim */ = {isa = PBXFileReference; lastKnownFileType = text; name = wasp_walk.anim; path = Build/Products/Release/wasp_walk.anim; sourceTree = SOURCE_ROOT; };
 		61E1692123DAB20F001F8FF2 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		61E1692323DAB218001F8FF2 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		61E1692523DAB237001F8FF2 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../../usr/local/Cellar/glfw/3.3.1/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
@@ -172,6 +181,9 @@
 				61E6AE1C23EA2B2000F8B7FF /* Keyframe.hpp */,
 				61E6AE1F23EA37EE00F8B7FF /* Channel.hpp */,
 				61CF74F023EF3FF7008C4BCE /* AnimationClip.hpp */,
+				613A8D6323FF3CE8000E7EA7 /* Particle.hpp */,
+				613A8D6623FF40E8000E7EA7 /* ParticleSystem.hpp */,
+				613A8D692401E90A000E7EA7 /* Triangle.hpp */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -194,6 +206,9 @@
 				61E6AE1B23EA2B2000F8B7FF /* Keyframe.cpp */,
 				61E6AE1E23EA37EE00F8B7FF /* Channel.cpp */,
 				61CF74EF23EF3FF7008C4BCE /* AnimationClip.cpp */,
+				613A8D6223FF3CE8000E7EA7 /* Particle.cpp */,
+				613A8D6523FF40E8000E7EA7 /* ParticleSystem.cpp */,
+				613A8D682401E90A000E7EA7 /* Triangle.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -277,10 +292,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				61E1693B23DAB78D001F8FF2 /* Tokenizer.cpp in Sources */,
+				613A8D6423FF3CE8000E7EA7 /* Particle.cpp in Sources */,
+				613A8D6723FF40E8000E7EA7 /* ParticleSystem.cpp in Sources */,
 				61E1694E23DB9341001F8FF2 /* matrix34.cpp in Sources */,
 				61E1695023DB9341001F8FF2 /* skeleton.cpp in Sources */,
 				61E6AE1D23EA2B2000F8B7FF /* Keyframe.cpp in Sources */,
 				61CF74F123EF3FF7008C4BCE /* AnimationClip.cpp in Sources */,
+				613A8D6A2401E90A000E7EA7 /* Triangle.cpp in Sources */,
 				61E1694D23DB9341001F8FF2 /* joint.cpp in Sources */,
 				61E1693A23DAB78D001F8FF2 /* main.cpp in Sources */,
 				61E1694F23DB9341001F8FF2 /* vector3.cpp in Sources */,

@@ -189,10 +189,12 @@ void Skin::DrawSetting(){
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
     
     
+    
     // Generate EBO, bind the EBO to the bound VAO and send the data
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(triangles[0]) * triangles.size(), triangles.data(), GL_STATIC_DRAW);
+     
 
     // Unbind the VBOs.
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -209,15 +211,7 @@ void Skin::Draw(const glm::mat4& viewProjMtx, GLuint shader){
     // actiavte the shader program
     glm::mat4 model =  glm::mat4(1.0f);
     glm::vec3 color = glm::vec3(0.5f, 0.5f, 0.5f);
-    /*
-    glm::vec3 dir[2];
-    glm::vec3 lighDir = normalize(glm::vec3(1,5,2));
-    dir[0] = normalize(glm::vec3(1,5,2));
-    dir[1] = normalize(glm::vec3(5,5,5));
-    glm::vec3 light[2];
-    light[0] = glm::vec3(1,0,0);
-    light[1] = glm::vec3(0,0,1);
-     */
+
     glEnable(GL_BLEND);
 
     glUseProgram(shader);

@@ -16,6 +16,7 @@ Cube * Window::cube;
 Skeleton * Window::mainSkeleton;
 Skin* Window::mainSkin;
 AnimationClip* Window::mainAnimation;
+ParticleSystem* Window::mainParticleSystem;
 
 float Window::startTime;
 float Window::currentTime;
@@ -24,6 +25,10 @@ float Window::pauseEnd;
 bool Window::shouldPause;
 
 
+// Switch
+int Window::nowLoading = -1;
+int Window::loadAnimation = 0;
+int Window::loadCloth = 1;
 
 
 // Joint selection Properties
@@ -65,38 +70,42 @@ bool Window::initializeObjects(int argc,char **argv)
 {
 	// Create a cube
 	cube = new Cube();
-    mainSkeleton = new Skeleton();
+    mainParticleSystem = new ParticleSystem(20.0f);
     
-    if(argc == 1) {
-        mainSkeleton->Load("wasp.skel");
-    } else{
-        mainSkeleton->Load(argv[1]);
-        //std::cout << argc << std::endl;
-    }
+    // Decide to what to load
+    nowLoading = loadCloth;
     
-    
-    // Get all the joints in the mainSkeleton
-    jointGroup = mainSkeleton->GetJointGroup();
-    
-    mainSkin = new Skin(jointGroup);
-    
+    if(nowLoading == loadAnimation){
+        mainSkeleton = new Skeleton();
+        
+        if(argc == 1) {
+            mainSkeleton->Load("wasp.skel");
+        } else{
+            mainSkeleton->Load(argv[1]);
+            //std::cout << argc << std::endl;
+        }
+        
+        // Get all the joints in the mainSkeleton
+        jointGroup = mainSkeleton->GetJointGroup();
+        
+        mainSkin = new Skin(jointGroup);
+        
 
-    //mainSkin->Start("wasp_smooth.skin");
-    if(argc == 1){
-        mainSkin->Start("wasp.skin");
-    } else {
-        mainSkin->Start(argv[2]);
+        //mainSkin->Start("wasp_smooth.skin");
+        if(argc == 1){
+            mainSkin->Start("wasp.skin");
+        } else {
+            mainSkin->Start(argv[2]);
+        }
+        
+        mainAnimation = new AnimationClip(jointGroup);
+        
+        if(argc == 1){
+            startTime = clock();
+            mainAnimation->Load("wasp_walk.anim");
+            //mainAnimation->EvaluateAll(0);
+        }
     }
-    
-    mainAnimation = new AnimationClip(jointGroup);
-    
-    if(argc == 1){
-        startTime = clock();
-        mainAnimation->Load("wasp_walk.anim");
-        //mainAnimation->EvaluateAll(0);
-    }
-    //mainSkeleton->Start();
-	//cube = new Cube(glm::vec3(-1, 0, -2), glm::vec3(1, 1, 1));
 
 	return true;
 }
@@ -201,15 +210,19 @@ void Window::idleCallback()
     
     //currentTime = (float)(clock()-startTime)/CLOCKS_PER_SEC;  //1000000
     if(!shouldPause){
-        currentTime = (float)(clock()-startTime)/500000;  //1000000
+        currentTime = (float)(clock()-startTime)/1000000000;  //1000000
     }
 
 	// Perform any updates as necessary. 
 	Cam->Update();
+    mainParticleSystem->Update(currentTime);
+    //cerr << currentTime << endl;
     
-    mainSkeleton->Update();
-    mainSkin->Update();
-    mainAnimation->Update(currentTime);
+    if(nowLoading == loadAnimation){
+        mainSkeleton->Update();
+        mainSkin->Update();
+        mainAnimation->Update(currentTime);
+    }
 
     //cerr<<mainAnimation->channels[3]->extrapOut<<endl;
     //cerr << currentTime << endl;
@@ -226,10 +239,14 @@ void Window::displayCallback(GLFWwindow* window)
     
 	// Render the object.
 	//cube->draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
-    //mainSkeleton->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
-
-    mainSkin->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
-
+    
+    if(nowLoading == loadAnimation){
+        //mainSkeleton->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
+        mainSkin->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
+        
+    }
+    
+    mainParticleSystem->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
 	// Gets events, including input such as keyboard and mouse or window resizing.
 	glfwPollEvents();
 	// Swap buffers.
@@ -297,76 +314,90 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
             
             case GLFW_KEY_P:
                 // Pause the animation logic
-                if(!shouldPause){
-                    pauseStart = clock();
-                    shouldPause = true;
-                    
-                } else {
-                    pauseEnd = clock();
-                    startTime += pauseEnd - pauseStart;
-                    shouldPause = false;
+                if(nowLoading == loadAnimation){
+                    if(!shouldPause){
+                        pauseStart = clock();
+                        shouldPause = true;
+                        
+                    } else {
+                        pauseEnd = clock();
+                        startTime += pauseEnd - pauseStart;
+                        shouldPause = false;
+                    }
                 }
                 break;
                 
             case GLFW_KEY_X:
-                selectJoint(0);
-                std::cout<<"Switching to change dof x value" << std::endl;
+                if(nowLoading == loadAnimation){
+                    selectJoint(0);
+                    std::cout<<"Switching to change dof x value" << std::endl;
+                }
                 break;
                 
             case GLFW_KEY_Y:
-                selectJoint(1);
-                std::cout<<"Switching to change dof y value" << std::endl;
+                if(nowLoading == loadAnimation){
+                    selectJoint(1);
+                    std::cout<<"Switching to change dof y value" << std::endl;
+                }
                 break;
                 
             case GLFW_KEY_Z:
-                selectJoint(2);
-                std::cout<<"Switching to change dof z value" << std::endl;
+                if(nowLoading == loadAnimation){
+                    selectJoint(2);
+                    std::cout<<"Switching to change dof z value" << std::endl;
+                }
                 break;
             
             case GLFW_KEY_RIGHT:
-                if(currentJointIndex+1 >= jointGroup.size()){
-                    currentJointIndex = (int)(jointGroup.size()-1);
-                } else {
-                    currentJointIndex++;
-                }
+                if(nowLoading == loadAnimation){
+                    if(currentJointIndex+1 >= jointGroup.size()){
+                        currentJointIndex = (int)(jointGroup.size()-1);
+                    } else {
+                        currentJointIndex++;
+                    }
                 
-                std::cout << "Switching to " << jointGroup[currentJointIndex]->GetName() << std::endl;
+                    std::cout << "Switching to " << jointGroup[currentJointIndex]->GetName() << std::endl;
+                }
                 break;
                 
             case GLFW_KEY_LEFT:
-            
-                if(currentJointIndex-1 < 0){
-                    currentJointIndex = 0;
-                } else {
-                    currentJointIndex--;
-                }
+                if(nowLoading == loadAnimation){
+                    if(currentJointIndex-1 < 0){
+                        currentJointIndex = 0;
+                    } else {
+                        currentJointIndex--;
+                    }
                 
-                std::cout << "Now at " << jointGroup[currentJointIndex]->GetName() << std::endl;
+                    std::cout << "Now at " << jointGroup[currentJointIndex]->GetName() << std::endl;
+                }
                 
                 break;
             
             case GLFW_KEY_UP:
-                
-                changeDof(0.2);
-                std::cout << "Now increasing "<<jointGroup[currentJointIndex]->GetName() << "'s ";
-                if(xyzChoice == 0){
-                    std::cout << "dof x value." << std::endl;
-                } else if(xyzChoice == 1){
-                    std::cout << "dof y value." << std::endl;
-                } else {
-                    std::cout << "dof z value." << std::endl;
+                if(nowLoading == loadAnimation){
+                    changeDof(0.2);
+                    std::cout << "Now increasing "<<jointGroup[currentJointIndex]->GetName() << "'s ";
+                    if(xyzChoice == 0){
+                        std::cout << "dof x value." << std::endl;
+                    } else if(xyzChoice == 1){
+                        std::cout << "dof y value." << std::endl;
+                    } else {
+                        std::cout << "dof z value." << std::endl;
+                    }
                 }
                 break;
             
             case GLFW_KEY_DOWN:
-                changeDof(-0.2);
-                std::cout << "Now decreasing "<<jointGroup[currentJointIndex]->GetName() << "'s ";
-                if(xyzChoice == 0){
-                    std::cout << "dof x value." << std::endl;
-                } else if(xyzChoice == 1){
-                    std::cout << "dof y value." << std::endl;
-                } else {
-                    std::cout << "dof z value." << std::endl;
+                if(nowLoading == loadAnimation){
+                    changeDof(-0.2);
+                    std::cout << "Now decreasing "<<jointGroup[currentJointIndex]->GetName() << "'s ";
+                    if(xyzChoice == 0){
+                        std::cout << "dof x value." << std::endl;
+                    } else if(xyzChoice == 1){
+                        std::cout << "dof y value." << std::endl;
+                    } else {
+                        std::cout << "dof z value." << std::endl;
+                    }
                 }
                 break;
             
