@@ -10,6 +10,7 @@
 		613A8D6423FF3CE8000E7EA7 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613A8D6223FF3CE8000E7EA7 /* Particle.cpp */; };
 		613A8D6723FF40E8000E7EA7 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613A8D6523FF40E8000E7EA7 /* ParticleSystem.cpp */; };
 		613A8D6A2401E90A000E7EA7 /* Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613A8D682401E90A000E7EA7 /* Triangle.cpp */; };
+		613A8D6D24033C92000E7EA7 /* SpringDamper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613A8D6B24033C92000E7EA7 /* SpringDamper.cpp */; };
 		61CF74F123EF3FF7008C4BCE /* AnimationClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61CF74EF23EF3FF7008C4BCE /* AnimationClip.cpp */; };
 		61E1692223DAB20F001F8FF2 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E1692123DAB20F001F8FF2 /* GLUT.framework */; };
 		61E1692423DAB218001F8FF2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E1692323DAB218001F8FF2 /* OpenGL.framework */; };
@@ -51,6 +52,8 @@
 		613A8D6623FF40E8000E7EA7 /* ParticleSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleSystem.hpp; sourceTree = "<group>"; };
 		613A8D682401E90A000E7EA7 /* Triangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Triangle.cpp; sourceTree = "<group>"; };
 		613A8D692401E90A000E7EA7 /* Triangle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Triangle.hpp; sourceTree = "<group>"; };
+		613A8D6B24033C92000E7EA7 /* SpringDamper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpringDamper.cpp; sourceTree = "<group>"; };
+		613A8D6C24033C92000E7EA7 /* SpringDamper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SpringDamper.hpp; sourceTree = "<group>"; };
 		61CF74EF23EF3FF7008C4BCE /* AnimationClip.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationClip.cpp; sourceTree = "<group>"; };
 		61CF74F023EF3FF7008C4BCE /* AnimationClip.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AnimationClip.hpp; sourceTree = "<group>"; };
 		61CF74F323EF539D008C4BCE /* wasp_walk.anim */ = {isa = PBXFileReference; lastKnownFileType = text; name = wasp_walk.anim; path = Build/Products/Release/wasp_walk.anim; sourceTree = SOURCE_ROOT; };
@@ -184,6 +187,7 @@
 				613A8D6323FF3CE8000E7EA7 /* Particle.hpp */,
 				613A8D6623FF40E8000E7EA7 /* ParticleSystem.hpp */,
 				613A8D692401E90A000E7EA7 /* Triangle.hpp */,
+				613A8D6C24033C92000E7EA7 /* SpringDamper.hpp */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -209,6 +213,7 @@
 				613A8D6223FF3CE8000E7EA7 /* Particle.cpp */,
 				613A8D6523FF40E8000E7EA7 /* ParticleSystem.cpp */,
 				613A8D682401E90A000E7EA7 /* Triangle.cpp */,
+				613A8D6B24033C92000E7EA7 /* SpringDamper.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				613A8D6D24033C92000E7EA7 /* SpringDamper.cpp in Sources */,
 				61E1693B23DAB78D001F8FF2 /* Tokenizer.cpp in Sources */,
 				613A8D6423FF3CE8000E7EA7 /* Particle.cpp in Sources */,
 				613A8D6723FF40E8000E7EA7 /* ParticleSystem.cpp in Sources */,

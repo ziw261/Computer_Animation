@@ -1,6 +1,7 @@
 dependencies: \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/src/ParticleSystem.cpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/ParticleSystem.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/src/SpringDamper.cpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/SpringDamper.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Particle.hpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/core.h \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/glm.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/detail/_fixes.hpp \
@@ -168,7 +169,4 @@ dependencies: \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../geometric.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../trigonometric.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../matrix.hpp \
-  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/transform.inl \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Particle.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Triangle.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/SpringDamper.hpp
+  /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/transform.inl

@@ -186,4 +186,5 @@ dependencies: /Users/aki/GitHub/CSE169_Animation/CSE169/src/Window.cpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/Keyframe.hpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/ParticleSystem.hpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/Particle.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Triangle.hpp
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Triangle.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/SpringDamper.hpp

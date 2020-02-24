@@ -23,7 +23,7 @@ float Window::currentTime;
 float Window::pauseStart;
 float Window::pauseEnd;
 bool Window::shouldPause;
-
+bool Window::isAirOn;
 
 // Switch
 int Window::nowLoading = -1;
@@ -70,12 +70,15 @@ bool Window::initializeObjects(int argc,char **argv)
 {
 	// Create a cube
 	cube = new Cube();
-    mainParticleSystem = new ParticleSystem(20.0f);
     
     // Decide to what to load
     nowLoading = loadCloth;
     
-    if(nowLoading == loadAnimation){
+    if(nowLoading == loadCloth){
+        isAirOn = true;
+        mainParticleSystem = new ParticleSystem(40.0f);
+    }
+    else if(nowLoading == loadAnimation){
         mainSkeleton = new Skeleton();
         
         if(argc == 1) {
@@ -215,15 +218,17 @@ void Window::idleCallback()
 
 	// Perform any updates as necessary. 
 	Cam->Update();
-    mainParticleSystem->Update(currentTime);
     //cerr << currentTime << endl;
-    
-    if(nowLoading == loadAnimation){
+    if(nowLoading == loadCloth){
+        mainParticleSystem->Update(0.002f);
+
+    }
+    else if(nowLoading == loadAnimation){
         mainSkeleton->Update();
         mainSkin->Update();
         mainAnimation->Update(currentTime);
     }
-
+    
     //cerr<<mainAnimation->channels[3]->extrapOut<<endl;
     //cerr << currentTime << endl;
 	//cube->update();
@@ -245,8 +250,9 @@ void Window::displayCallback(GLFWwindow* window)
         mainSkin->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
         
     }
-    
-    mainParticleSystem->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
+    else if(nowLoading == loadCloth){
+        mainParticleSystem->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
+    }
 	// Gets events, including input such as keyboard and mouse or window resizing.
 	glfwPollEvents();
 	// Swap buffers.
@@ -400,6 +406,56 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     }
                 }
                 break;
+            
+            case GLFW_KEY_W:
+                if(nowLoading == loadCloth){
+                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,0.2f,0.0f));
+                }
+                break;
+                
+            case GLFW_KEY_A:
+                if(nowLoading == loadCloth){
+                    mainParticleSystem->MoveFixedPoint(glm::vec3(-0.2f,0.0f,0.0f));
+                }
+                break;
+            
+            case GLFW_KEY_S:
+                if(nowLoading == loadCloth){
+                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,-0.2f,0.0f));
+                }
+                break;
+            
+            case GLFW_KEY_D:
+                if(nowLoading == loadCloth){
+                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.2f,0.0f,0.0f));
+                }
+                break;
+            
+            case GLFW_KEY_Q:
+                if(nowLoading == loadCloth){
+                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,0.0f,0.2f));
+                }
+                break;
+                
+            case GLFW_KEY_E:
+                if(nowLoading == loadCloth){
+                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,0.0f,-0.2f));
+                }
+                break;
+            
+            case GLFW_KEY_T:
+                if(nowLoading == loadCloth){
+                    if(isAirOn){
+                        isAirOn = false;
+                        cout << "Wind is Off" << endl;
+                        mainParticleSystem->airVelocity = glm::vec3(0);
+                    } else {
+                        isAirOn = true;
+                        cout  << "Wind is On" << endl;
+                        mainParticleSystem->airVelocity = glm::vec3(0.0f, 0.0f, -15.0f);
+
+                    }
+                }
             
 
             default:

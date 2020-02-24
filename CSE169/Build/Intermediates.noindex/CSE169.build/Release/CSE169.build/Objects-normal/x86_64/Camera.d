@@ -187,6 +187,7 @@ dependencies: /Users/aki/GitHub/CSE169_Animation/CSE169/src/Camera.cpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/ParticleSystem.hpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/Particle.hpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/Triangle.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/SpringDamper.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/euler_angles.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/euler_angles.inl \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/compatibility.hpp \

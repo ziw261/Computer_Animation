@@ -29,11 +29,14 @@ public:
     vector<glm::vec3> vertices;
     vector<glm::vec3> normals;
     glm::vec3 normal;
+    float airDensity;
+    float dragCoeff;
     
     
     // Member Functions
     Triangle(Particle* a, Particle* b, Particle* c);
-    void calNormal();
+    void CalNormal();
+    void ApplyAeroDynaForce(glm::vec3 airVelocity);
     //void Update();
     //void Draw(const glm::mat4& viewProjMtx, glm::mat4& modelView, GLuint shader);
     //void DrawSetting();

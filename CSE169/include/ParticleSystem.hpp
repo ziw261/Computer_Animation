@@ -17,6 +17,7 @@
 #include "core.h"
 #include "Particle.hpp"
 #include "Triangle.hpp"
+#include "SpringDamper.hpp"
 #include <vector>
 
 using namespace std;
@@ -27,15 +28,18 @@ public:
     
     //Member Variables
     int numParticles;
-    float width, divDis;
+    float width, unitLen;
     vector<Particle*> particles;
     glm::vec3 gravity = glm::vec3(0,-9.8f,0);
+    glm::vec3 airVelocity;
     GLuint VAO;
     GLuint VBO_positions, VBO_normals, EBO;
     vector<glm::vec3> vertices;
     vector<glm::vec3> normals;
     vector<Triangle*> triangles;
+    vector<SpringDamper*> springDampers;
     vector<int> triangleIndex;
+    
     
     
     //Member Functions
@@ -47,6 +51,14 @@ public:
     void ApplyGravity();
     void InitParticles();
     void InitTriangles();
+    void InitSpringDamper();
+    void UpdateVertNorm();
+    void UpdateParticles(float deltaTime);
+    void UpdateSpringDamper();
+    void MoveFixedPoint(glm::vec3 distance);
+    void ApplyWind();
+
+    ~ParticleSystem();
 };
 
 

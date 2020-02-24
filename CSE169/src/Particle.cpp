@@ -31,12 +31,23 @@ void Particle::ZeroForce(){
 void Particle::Update(float deltaTime){
     
     if(!isFixed){
-        glm::vec3 acceleration = (1.0f/mass) * force;
+        //glm::vec3 acceleration = (1.0f/mass) * force;
+        glm::vec3 acceleration = force/mass;
         velocity += acceleration*deltaTime;
         position += velocity * deltaTime;
+        
         //cerr << position.x << " " << position.y << " " << position.z << " " << endl;
         //cerr << acceleration.x << " " << acceleration.y << " " << acceleration.z << " " << endl;
         //cerr << force.x << " " << force.y << " " << force.z << " " << endl;
 
     }
+    
 }
+
+Particle::~Particle(){
+    
+}
+
+
+
+

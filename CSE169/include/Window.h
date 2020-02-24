@@ -46,6 +46,8 @@ public:
     
     // Cloth
     static ParticleSystem* mainParticleSystem;
+    static bool isAirOn;
+    
     
     // Animation Clock
     static float startTime;

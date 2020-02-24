@@ -11,10 +11,12 @@
 ParticleSystem::ParticleSystem(float width){
     
     this->width = width;
-    divDis = 0.1f;
+    unitLen = 0.1f;
+    airVelocity = glm::vec3(0.0f,0.0f,-30.0f);
     
     InitParticles();
     InitTriangles();
+    InitSpringDamper();
     
     // Generate a vertex array (VAO) and two vertex buffer objects (VBO).
     glGenVertexArrays(1, &VAO);
@@ -27,9 +29,10 @@ ParticleSystem::ParticleSystem(float width){
 void ParticleSystem::Update(float deltaTime){
     ZeroForce();
     ApplyGravity();
-    for(int i=0; i<particles.size(); i++){
-        particles[i]->Update(deltaTime);
-    }
+    ApplyWind();
+    UpdateSpringDamper();
+    UpdateParticles(deltaTime);
+    UpdateVertNorm();
     DrawSetting();
 }
 
@@ -45,13 +48,27 @@ void ParticleSystem::ApplyGravity(){
     }
 }
 
+
+void ParticleSystem::ApplyWind(){
+    for(int i=0; i<triangles.size(); i++){
+        triangles[i]->ApplyAeroDynaForce(airVelocity);
+    }
+}
+
+
+
+void ParticleSystem::MoveFixedPoint(glm::vec3 distance){
+    for(int i=0; i<width; i++){
+        particles[i]->position = particles[i]->position+distance;
+    }
+}
+
 void ParticleSystem::InitParticles(){
     
     //float currZ = width * -1.0f;
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < width; j++) {
-            Particle* newPart = new Particle(glm::vec3((j-width/2)*0.2, (width/2-i)*0.2, 0));
-            
+            Particle* newPart = new Particle(glm::vec3((j-width/2)*unitLen, (width/2-i)*unitLen, 0));
             if (i == 0){
                 newPart->isFixed = true;
             }
@@ -81,26 +98,28 @@ void ParticleSystem::InitTriangles(){
     {
         for (int j = 0; j < width-1; j++)
         {
-            int indexA = (width * i) + j, indexB = (width * (i - 1)) + (j + 1);
-            int indexC = (width * (i - 1)) + j, indexD = (width * (i)) + (j + 1);
-            Triangle* upperLTriangle = new Triangle(particles[indexA], particles[indexB], particles[indexC]);
+            int indexA = (width * (i - 1)) + j;
+            int indexB = (width * (i - 1)) + (j + 1);
+            int indexC = (width * i) + j;
+            int indexD = (width * (i)) + (j + 1);
+            Triangle* upperLTriangle = new Triangle(particles[indexC], particles[indexB], particles[indexA]);
             triangles.push_back(upperLTriangle);
-            triangleIndex.push_back(indexA);
-            triangleIndex.push_back(indexB);
             triangleIndex.push_back(indexC);
-            Triangle* upperRTriangle = new Triangle(particles[indexD], particles[indexB], particles[indexC]);
+            triangleIndex.push_back(indexB);
+            triangleIndex.push_back(indexA);
+            Triangle* upperRTriangle = new Triangle(particles[indexD], particles[indexB], particles[indexA]);
             triangles.push_back(upperRTriangle);
             triangleIndex.push_back(indexD);
             triangleIndex.push_back(indexB);
-            triangleIndex.push_back(indexC);
-            Triangle* lowerLTriangle = new Triangle(particles[indexA], particles[indexD], particles[indexC]);
+            triangleIndex.push_back(indexA);
+            Triangle* lowerLTriangle = new Triangle(particles[indexC], particles[indexD], particles[indexA]);
             triangles.push_back(lowerLTriangle);
-            triangleIndex.push_back(indexA);
-            triangleIndex.push_back(indexD);
             triangleIndex.push_back(indexC);
-            Triangle* lowerRTriangle = new Triangle(particles[indexA], particles[indexD], particles[indexB]);
-            triangles.push_back(lowerRTriangle);
+            triangleIndex.push_back(indexD);
             triangleIndex.push_back(indexA);
+            Triangle* lowerRTriangle = new Triangle(particles[indexC], particles[indexD], particles[indexB]);
+            triangles.push_back(lowerRTriangle);
+            triangleIndex.push_back(indexC);
             triangleIndex.push_back(indexD);
             triangleIndex.push_back(indexB);
 
@@ -177,8 +196,56 @@ void ParticleSystem::InitTriangles(){
 }
 
 
+void ParticleSystem::InitSpringDamper(){
+    
+    float diagLen = glm::sqrt(pow(unitLen,2) + pow(unitLen,2));
+    
+    for(int i=1; i<width; i++){
+        for(int j=0; j<width-1; j++){
+            
+            int indexA = (width * (i - 1)) + j;
+            int indexB = (width * (i - 1)) + (j + 1);
+            int indexC = (width * i) + j;
+            int indexD = (width * (i)) + (j + 1);
+            
+            SpringDamper* vertL = new SpringDamper(particles[indexC], particles[indexA], unitLen);
+            springDampers.push_back(vertL);
+            SpringDamper* horiT = new SpringDamper(particles[indexA], particles[indexB], unitLen);
+            springDampers.push_back(horiT);
+            SpringDamper* diagL = new SpringDamper(particles[indexA], particles[indexD], diagLen);
+            springDampers.push_back(diagL);
+            SpringDamper* diagR = new SpringDamper(particles[indexC], particles[indexB], diagLen);
+            springDampers.push_back(diagR);
+            
+            if(i == width-1){
+                SpringDamper* horiB = new SpringDamper(particles[indexC], particles[indexD], unitLen);
+                springDampers.push_back(horiB);
+            }
+            if(j+1 == width-1){
+                SpringDamper* vertR = new SpringDamper(particles[indexB], particles[indexD], unitLen);
+                springDampers.push_back(vertR);
+            }
+        }
+    }
+}
 
-void ParticleSystem::DrawSetting(){
+
+void ParticleSystem::UpdateParticles(float deltaTime){
+    for(int i=0; i<particles.size(); i++){
+        particles[i]->Update(deltaTime);
+    }
+}
+
+
+void ParticleSystem::UpdateSpringDamper(){
+    for(int i=0; i<springDampers.size(); i++){
+        springDampers[i]->ComputeForce();
+    }
+}
+
+
+
+void ParticleSystem::UpdateVertNorm(){
     vertices.clear();
     normals.clear();
     for(int i=0; i<particles.size(); i++){
@@ -186,10 +253,14 @@ void ParticleSystem::DrawSetting(){
         vertices.push_back(particles[i]->position);
         
         normals.push_back(particles[i]->normal);
-    }
-    //cerr << particles.size() << endl;
+        //cerr << particles.size() << endl;
 
-    
+    }
+}
+
+
+
+void ParticleSystem::DrawSetting(){
     
     // Bind to the VAO.
     glBindVertexArray(VAO);
@@ -249,5 +320,11 @@ void ParticleSystem::Draw(const glm::mat4 &viewProjMtx, GLuint shader){
 
 
 
-
+ParticleSystem::~ParticleSystem(){
+    // Delete the VBOs and the VAO.
+    glDeleteBuffers(1, &VBO_positions);
+    glDeleteBuffers(1, &VBO_normals);
+    glDeleteBuffers(1, &EBO);
+    glDeleteVertexArrays(1, &VAO);
+}
 
