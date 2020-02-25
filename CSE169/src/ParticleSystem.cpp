@@ -32,6 +32,12 @@ void ParticleSystem::Update(float deltaTime){
     ApplyWind();
     UpdateSpringDamper();
     UpdateParticles(deltaTime);
+    for(int j=0; j<particles.size(); j++){
+        particles[j]->normal = glm::vec3(0);
+    }
+    for(int i=0; i<triangles.size(); i++){
+        triangles[i]->CalNormal();
+    }
     UpdateVertNorm();
     DrawSetting();
 }
@@ -132,73 +138,7 @@ void ParticleSystem::InitTriangles(){
 
         }
     }
-     /*
-    Triangle * t1 = new Triangle(particles[0], particles[1], particles[3]);
-    Triangle * t2 = new Triangle(particles[0], particles[1], particles[4]);
-    Triangle * t3 = new Triangle(particles[0], particles[3], particles[4]);
-    Triangle * t4 = new Triangle(particles[1], particles[3], particles[4]);
-    Triangle * t5 = new Triangle(particles[1], particles[2], particles[4]);
-    Triangle * t6 = new Triangle(particles[1], particles[2], particles[5]);
-    Triangle * t7 = new Triangle(particles[1], particles[4], particles[5]);
-    Triangle * t8 = new Triangle(particles[2], particles[4], particles[5]);
-    Triangle * t9 = new Triangle(particles[3], particles[4], particles[6]);
-    Triangle * t10 = new Triangle(particles[3], particles[4], particles[7]);
-    Triangle * t11 = new Triangle(particles[3], particles[6], particles[7]);
-    Triangle * t12 = new Triangle(particles[4], particles[6], particles[7]);
-    Triangle * t13 = new Triangle(particles[4], particles[5], particles[7]);
-    Triangle * t14 = new Triangle(particles[4], particles[5], particles[8]);
-    Triangle * t15 = new Triangle(particles[4], particles[7], particles[8]);
-    Triangle * t16 = new Triangle(particles[5], particles[7], particles[8]);
-    triangleIndex.push_back(0);
-    triangleIndex.push_back(1);
-    triangleIndex.push_back(3);
-    triangleIndex.push_back(0);
-    triangleIndex.push_back(1);
-    triangleIndex.push_back(4);
-    triangleIndex.push_back(0);
-    triangleIndex.push_back(3);
-    triangleIndex.push_back(4);
-    triangleIndex.push_back(1);
-    triangleIndex.push_back(3);
-    triangleIndex.push_back(4);
-    triangleIndex.push_back(1);
-    triangleIndex.push_back(2);
-    triangleIndex.push_back(4);
-    triangleIndex.push_back(1);
-    triangleIndex.push_back(2);
-    triangleIndex.push_back(5);
-    triangleIndex.push_back(1);
-    triangleIndex.push_back(4);
-    triangleIndex.push_back(5);
-    triangleIndex.push_back(2);
-    triangleIndex.push_back(4);
-    triangleIndex.push_back(5);
-    triangleIndex.push_back(3);
-    triangleIndex.push_back(4);
-    triangleIndex.push_back(6);
-    triangleIndex.push_back(3);
-    triangleIndex.push_back(4);
-    triangleIndex.push_back(7);
-    triangleIndex.push_back(3);
-    triangleIndex.push_back(6);
-    triangleIndex.push_back(7);
-    triangleIndex.push_back(4);
-    triangleIndex.push_back(6);
-    triangleIndex.push_back(7);
-    triangleIndex.push_back(4);
-    triangleIndex.push_back(5);
-    triangleIndex.push_back(7);
-    triangleIndex.push_back(4);
-    triangleIndex.push_back(5);
-    triangleIndex.push_back(8);
-    triangleIndex.push_back(4);
-    triangleIndex.push_back(7);
-    triangleIndex.push_back(8);
-    triangleIndex.push_back(5);
-    triangleIndex.push_back(7);
-    triangleIndex.push_back(8);
 
-*/
     
 }
 
@@ -259,7 +199,7 @@ void ParticleSystem::UpdateVertNorm(){
        
         vertices.push_back(particles[i]->position);
         
-        normals.push_back(particles[i]->normal);
+        normals.push_back(glm::normalize(particles[i]->normal));
         //cerr << particles.size() << endl;
 
     }
