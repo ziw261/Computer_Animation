@@ -76,7 +76,8 @@ bool Window::initializeObjects(int argc,char **argv)
     
     if(nowLoading == loadCloth){
         isAirOn = true;
-        mainParticleSystem = new ParticleSystem(40.0f);
+        mainParticleSystem = new ParticleSystem(30.0f);
+       // mainParticleSystem->airVelocity = glm::vec3(0);
     }
     else if(nowLoading == loadAnimation){
         mainSkeleton = new Skeleton();
@@ -452,10 +453,30 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     } else {
                         isAirOn = true;
                         cout  << "Wind is On" << endl;
-                        mainParticleSystem->airVelocity = glm::vec3(0.0f, 0.0f, -15.0f);
+                        mainParticleSystem->airVelocity = glm::vec3(0.0f, 0.0f, -10.0f);
 
                     }
                 }
+                break;
+            
+            case GLFW_KEY_L:
+                if(nowLoading == loadCloth){
+                    mainParticleSystem->ReleaseFixedPoint();
+                }
+                break;
+                
+                
+            case GLFW_KEY_V:
+                if(nowLoading == loadCloth){
+                    mainParticleSystem->airVelocity += glm::vec3(0.0f,0.0f,5.0f);
+                }
+                break;
+            
+            case GLFW_KEY_C:
+                if(nowLoading == loadCloth){
+                    mainParticleSystem->airVelocity -= glm::vec3(0.0f,0.0f,5.0f);
+                }
+                break;
             
 
             default:

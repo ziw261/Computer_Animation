@@ -12,7 +12,7 @@ ParticleSystem::ParticleSystem(float width){
     
     this->width = width;
     unitLen = 0.1f;
-    airVelocity = glm::vec3(0.0f,0.0f,-30.0f);
+    airVelocity = glm::vec3(0.0f,0.0f,-15.0f);
     
     InitParticles();
     InitTriangles();
@@ -60,6 +60,13 @@ void ParticleSystem::ApplyWind(){
 void ParticleSystem::MoveFixedPoint(glm::vec3 distance){
     for(int i=0; i<width; i++){
         particles[i]->position = particles[i]->position+distance;
+    }
+}
+
+
+void ParticleSystem::ReleaseFixedPoint(){
+    for(int i=0; i<width; i++){
+        particles[i]->isFixed = false;
     }
 }
 
@@ -295,7 +302,7 @@ void ParticleSystem::DrawSetting(){
 void ParticleSystem::Draw(const glm::mat4 &viewProjMtx, GLuint shader){
     // actiavte the shader program
     glm::mat4 model =  glm::mat4(1.0f);
-    glm::vec3 color = glm::vec3(1.0f, 0, 0);
+    glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
 
     glEnable(GL_BLEND);
 
@@ -309,7 +316,8 @@ void ParticleSystem::Draw(const glm::mat4 &viewProjMtx, GLuint shader){
 
     // Bind the VAO
     glBindVertexArray(VAO);
-
+    
+    
     // draw the points using triangles, indexed with the EBO
     glDrawElements(GL_TRIANGLES, triangleIndex.size(), GL_UNSIGNED_INT, 0);
 

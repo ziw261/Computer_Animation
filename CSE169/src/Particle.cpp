@@ -39,7 +39,15 @@ void Particle::Update(float deltaTime){
         //cerr << position.x << " " << position.y << " " << position.z << " " << endl;
         //cerr << acceleration.x << " " << acceleration.y << " " << acceleration.z << " " << endl;
         //cerr << force.x << " " << force.y << " " << force.z << " " << endl;
-
+        
+    }
+    
+    if(position.y < -2){
+        position.y  = 2* (-2) -  position.y;
+        velocity.y = 0.2f * velocity.y;
+        velocity.x = (1-0.2) * velocity.x;
+        velocity.z = (1-0.2) * velocity.z;
+        //cerr << "been here" << endl;
     }
     
 }

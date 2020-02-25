@@ -57,6 +57,7 @@ public:
     void UpdateSpringDamper();
     void MoveFixedPoint(glm::vec3 distance);
     void ApplyWind();
+    void ReleaseFixedPoint();
 
     ~ParticleSystem();
 };
