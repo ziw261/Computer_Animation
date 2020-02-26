@@ -410,37 +410,37 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
             
             case GLFW_KEY_W:
                 if(nowLoading == loadCloth){
-                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,0.2f,0.0f));
+                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,0.1f,0.0f));
                 }
                 break;
                 
             case GLFW_KEY_A:
                 if(nowLoading == loadCloth){
-                    mainParticleSystem->MoveFixedPoint(glm::vec3(-0.2f,0.0f,0.0f));
+                    mainParticleSystem->MoveFixedPoint(glm::vec3(-0.1f,0.0f,0.0f));
                 }
                 break;
             
             case GLFW_KEY_S:
                 if(nowLoading == loadCloth){
-                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,-0.2f,0.0f));
+                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,-0.1f,0.0f));
                 }
                 break;
             
             case GLFW_KEY_D:
                 if(nowLoading == loadCloth){
-                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.2f,0.0f,0.0f));
+                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.1f,0.0f,0.0f));
                 }
                 break;
             
             case GLFW_KEY_Q:
                 if(nowLoading == loadCloth){
-                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,0.0f,0.2f));
+                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,0.0f,0.1f));
                 }
                 break;
                 
             case GLFW_KEY_E:
                 if(nowLoading == loadCloth){
-                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,0.0f,-0.2f));
+                    mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,0.0f,-0.1f));
                 }
                 break;
             

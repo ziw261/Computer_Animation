@@ -32,12 +32,6 @@ void ParticleSystem::Update(float deltaTime){
     ApplyWind();
     UpdateSpringDamper();
     UpdateParticles(deltaTime);
-    for(int j=0; j<particles.size(); j++){
-        particles[j]->normal = glm::vec3(0);
-    }
-    for(int i=0; i<triangles.size(); i++){
-        triangles[i]->CalNormal();
-    }
     UpdateVertNorm();
     DrawSetting();
 }
@@ -89,19 +83,6 @@ void ParticleSystem::InitParticles(){
             particles.push_back(newPart);
         }
     }
-     
-    /*
-    particles.clear();
-    particles.push_back(new Particle(glm::vec3(-1,1,0)));
-    particles.push_back(new Particle(glm::vec3(-1,2,0)));
-    particles.push_back(new Particle(glm::vec3(-1,3,0)));
-    particles.push_back(new Particle(glm::vec3(0,1,0)));
-    particles.push_back(new Particle(glm::vec3(0,2,0)));
-    particles.push_back(new Particle(glm::vec3(0,3,0)));
-    particles.push_back(new Particle(glm::vec3(1,1,0)));
-    particles.push_back(new Particle(glm::vec3(1,2,0)));
-    particles.push_back(new Particle(glm::vec3(1,3,0)));
-     */
 
 }
 
@@ -193,6 +174,14 @@ void ParticleSystem::UpdateSpringDamper(){
 
 
 void ParticleSystem::UpdateVertNorm(){
+    
+    for(int j=0; j<particles.size(); j++){
+        particles[j]->normal = glm::vec3(0);
+    }
+    for(int i=0; i<triangles.size(); i++){
+        triangles[i]->CalNormal();
+    }
+    
     vertices.clear();
     normals.clear();
     for(int i=0; i<particles.size(); i++){
