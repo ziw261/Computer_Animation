@@ -17,6 +17,7 @@ Skeleton * Window::mainSkeleton;
 Skin* Window::mainSkin;
 AnimationClip* Window::mainAnimation;
 ParticleSystem* Window::mainParticleSystem;
+Fluid* Window::mainFluid;
 
 float Window::startTime;
 float Window::currentTime;
@@ -29,6 +30,7 @@ bool Window::isAirOn;
 int Window::nowLoading = -1;
 int Window::loadAnimation = 0;
 int Window::loadCloth = 1;
+int Window::loadFluid = 2;
 
 
 // Joint selection Properties
@@ -72,9 +74,12 @@ bool Window::initializeObjects(int argc,char **argv)
 	cube = new Cube();
     
     // Decide to what to load
-    nowLoading = loadCloth;
+    nowLoading = loadFluid;
     
-    if(nowLoading == loadCloth){
+    if(nowLoading == loadFluid){
+        mainFluid = new Fluid();
+    }
+    else if(nowLoading == loadCloth){
         isAirOn = true;
         mainParticleSystem = new ParticleSystem(30.0f);
        // mainParticleSystem->airVelocity = glm::vec3(0);
@@ -254,6 +259,11 @@ void Window::displayCallback(GLFWwindow* window)
     else if(nowLoading == loadCloth){
         mainParticleSystem->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
     }
+    else if(nowLoading == loadFluid){
+        mainFluid ->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
+    }
+    
+    
 	// Gets events, including input such as keyboard and mouse or window resizing.
 	glfwPollEvents();
 	// Swap buffers.

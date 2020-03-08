@@ -187,4 +187,7 @@ dependencies: /Users/aki/GitHub/CSE169_Animation/CSE169/src/main.cpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/ParticleSystem.hpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/Particle.hpp \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/Triangle.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/SpringDamper.hpp
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/SpringDamper.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Fluid.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/FluidParticle.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Sphere.hpp

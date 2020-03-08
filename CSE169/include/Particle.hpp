@@ -30,6 +30,7 @@ public:
     
     
     // Member Functions
+    Particle();
     Particle(glm::vec3 position);
     void Update(float deltaTime);
     void Draw();

@@ -37,6 +37,7 @@ void SpringDamper::ComputeForce(){
     //cerr << l << endl;
     float fDamping = -1.0f * dampingFactor * (glm::dot(v1, e) - glm::dot(v2,e));
     float fSd = fSpring + fDamping;
+    //cerr << fSd << endl;
     //float fSd = fSpring;
     glm::vec3 fOne = fSd * e;
     glm::vec3 fTwo = -1.0f * fOne;

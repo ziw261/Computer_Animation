@@ -8,7 +8,12 @@
 
 #include "Particle.hpp"
 
+Particle::Particle(){
+    
+}
+
 Particle::Particle(glm::vec3 position){
+    //this->mass = 3.0f;
     this->mass = 1.0f;
     this->velocity = glm::vec3(0,0,0);
     this->force = glm::vec3(0,0,0);

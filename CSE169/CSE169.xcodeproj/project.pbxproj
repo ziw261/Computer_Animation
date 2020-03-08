@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6119F71E2414578E004BD01C /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6119F71C2414578E004BD01C /* Sphere.cpp */; };
+		6119F72124146E6B004BD01C /* Fluid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6119F71F24146E6B004BD01C /* Fluid.cpp */; };
+		6119F7242414C59F004BD01C /* FluidParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6119F7222414C59F004BD01C /* FluidParticle.cpp */; };
 		613A8D6423FF3CE8000E7EA7 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613A8D6223FF3CE8000E7EA7 /* Particle.cpp */; };
 		613A8D6723FF40E8000E7EA7 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613A8D6523FF40E8000E7EA7 /* ParticleSystem.cpp */; };
 		613A8D6A2401E90A000E7EA7 /* Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613A8D682401E90A000E7EA7 /* Triangle.cpp */; };
@@ -45,6 +48,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6119F71C2414578E004BD01C /* Sphere.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sphere.cpp; sourceTree = "<group>"; };
+		6119F71D2414578E004BD01C /* Sphere.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sphere.hpp; sourceTree = "<group>"; };
+		6119F71F24146E6B004BD01C /* Fluid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Fluid.cpp; sourceTree = "<group>"; };
+		6119F72024146E6B004BD01C /* Fluid.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Fluid.hpp; sourceTree = "<group>"; };
+		6119F7222414C59F004BD01C /* FluidParticle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FluidParticle.cpp; sourceTree = "<group>"; };
+		6119F7232414C59F004BD01C /* FluidParticle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FluidParticle.hpp; sourceTree = "<group>"; };
 		6125CA4523E38FE9000C6E10 /* wasp_smooth.skin */ = {isa = PBXFileReference; lastKnownFileType = text; name = wasp_smooth.skin; path = Build/Products/Release/wasp_smooth.skin; sourceTree = SOURCE_ROOT; };
 		613A8D6223FF3CE8000E7EA7 /* Particle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
 		613A8D6323FF3CE8000E7EA7 /* Particle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Particle.hpp; sourceTree = "<group>"; };
@@ -91,7 +100,7 @@
 		61E1695723DD2E6F001F8FF2 /* wasp.skel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wasp.skel; sourceTree = "<group>"; };
 		61E1695C23DEB014001F8FF2 /* Skin.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Skin.cpp; sourceTree = "<group>"; };
 		61E1695D23DEB014001F8FF2 /* Skin.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Skin.hpp; sourceTree = "<group>"; };
-		61E1696423DF7733001F8FF2 /* Readme */ = {isa = PBXFileReference; lastKnownFileType = text; path = Readme; sourceTree = "<group>"; };
+		61E1696423DF7733001F8FF2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		61E1696523DF77AF001F8FF2 /* CSE169 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CSE169; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E6AE1923EA2A4B00F8B7FF /* wasp.skin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wasp.skin; sourceTree = "<group>"; };
 		61E6AE1A23EA2A4B00F8B7FF /* tube_smooth.skin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tube_smooth.skin; sourceTree = "<group>"; };
@@ -136,7 +145,7 @@
 		61E168F623DAB16D001F8FF2 = {
 			isa = PBXGroup;
 			children = (
-				61E1696423DF7733001F8FF2 /* Readme */,
+				61E1696423DF7733001F8FF2 /* README.md */,
 				61E1695223DD2A7C001F8FF2 /* install */,
 				61E1694123DB926B001F8FF2 /* include */,
 				61E1694223DB927E001F8FF2 /* src */,
@@ -188,6 +197,9 @@
 				613A8D6623FF40E8000E7EA7 /* ParticleSystem.hpp */,
 				613A8D692401E90A000E7EA7 /* Triangle.hpp */,
 				613A8D6C24033C92000E7EA7 /* SpringDamper.hpp */,
+				6119F71D2414578E004BD01C /* Sphere.hpp */,
+				6119F72024146E6B004BD01C /* Fluid.hpp */,
+				6119F7232414C59F004BD01C /* FluidParticle.hpp */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -214,6 +226,9 @@
 				613A8D6523FF40E8000E7EA7 /* ParticleSystem.cpp */,
 				613A8D682401E90A000E7EA7 /* Triangle.cpp */,
 				613A8D6B24033C92000E7EA7 /* SpringDamper.cpp */,
+				6119F71C2414578E004BD01C /* Sphere.cpp */,
+				6119F71F24146E6B004BD01C /* Fluid.cpp */,
+				6119F7222414C59F004BD01C /* FluidParticle.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -300,6 +315,7 @@
 				61E1693B23DAB78D001F8FF2 /* Tokenizer.cpp in Sources */,
 				613A8D6423FF3CE8000E7EA7 /* Particle.cpp in Sources */,
 				613A8D6723FF40E8000E7EA7 /* ParticleSystem.cpp in Sources */,
+				6119F72124146E6B004BD01C /* Fluid.cpp in Sources */,
 				61E1694E23DB9341001F8FF2 /* matrix34.cpp in Sources */,
 				61E1695023DB9341001F8FF2 /* skeleton.cpp in Sources */,
 				61E6AE1D23EA2B2000F8B7FF /* Keyframe.cpp in Sources */,
@@ -313,7 +329,9 @@
 				61E1693C23DAB78D001F8FF2 /* Window.cpp in Sources */,
 				61E1695123DB9341001F8FF2 /* dof.cpp in Sources */,
 				61E1693E23DAB78D001F8FF2 /* Camera.cpp in Sources */,
+				6119F7242414C59F004BD01C /* FluidParticle.cpp in Sources */,
 				61E1693D23DAB78D001F8FF2 /* Cube.cpp in Sources */,
+				6119F71E2414578E004BD01C /* Sphere.cpp in Sources */,
 				61E6AE2023EA37EE00F8B7FF /* Channel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

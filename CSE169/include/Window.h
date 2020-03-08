@@ -12,6 +12,7 @@
 #include "Skin.hpp"
 #include "AnimationClip.hpp"
 #include "ParticleSystem.hpp"
+#include "Fluid.hpp"
 #include <iostream>
 #include <chrono>
 
@@ -48,6 +49,8 @@ public:
     static ParticleSystem* mainParticleSystem;
     static bool isAirOn;
     
+    // Fluid
+    static Fluid* mainFluid;
     
     // Animation Clock
     static float startTime;
@@ -61,6 +64,7 @@ public:
     static int nowLoading;
     static int loadAnimation;
     static int loadCloth;
+    static int loadFluid;
     
 	// Shader Program 
 	static GLuint shaderProgram;
