@@ -45,6 +45,7 @@ void FluidParticle::UpdateForces(){
 
 void FluidParticle::Update(float deltaTime){
     glm::vec3 acceleration = force/mass;
+    //glm::vec3 acceleration = force/localDensity;
     velocity += acceleration * deltaTime;
     position += velocity * deltaTime;
     
@@ -82,10 +83,10 @@ glm::vec3 FluidParticle::GetSpikyKernelGradient(float q, glm::vec3 posDiff)
 
 
 /* Attention */
-void FluidParticle::ApplyPressureForce()
-{
+void FluidParticle::ApplyPressureForce() {
     UpdatePressure();
-
+    
+    /*
     glm::vec3 tot = glm::vec3(0.0f, 0.0f, 0.0f);
     int size = neighbors.size();
     for (int i = 0; i < size; i++)
@@ -93,9 +94,23 @@ void FluidParticle::ApplyPressureForce()
         float leftOp = (pressure + neighbors[i]->pressure) / (2 * neighbors[i]->localDensity);
         float q = glm::length(position - neighbors[i]->position) / smoothingLength;
         tot = tot + (leftOp * GetSpikyKernelGradient(q, position - neighbors[i]->position));
+        
     }
     glm::vec3 res = (-1.0f * mass * tot);
     ApplyForce(res);
+     */
+     
+    
+    
+    glm::vec3 fpressure = glm::vec3(0);
+    for(int i=0; i<neighbors.size(); i++){
+        glm::vec3 r = position - neighbors[i]->position;
+        glm::vec3 wspikyGradient = CalWSpikyGradient(r, smoothingLength);
+        fpressure  += (neighbors[i]->mass / neighbors[i]->localDensity) * ((pressure + neighbors[i]->pressure) / 2.0f) * wspikyGradient;
+    }
+    ApplyForce(-1.0f * fpressure);
+     
+     
 }
 
 
@@ -198,6 +213,8 @@ float FluidParticle::GetViscousLagrangian(float q)
 /* Attention */
 void FluidParticle::ApplyViscosityForce() {
     //glm::vec3 viscousForce = mass * viscosity * getViscosityGradient();
+    
+    /*
     glm::vec3 tot = glm::vec3(0.0f, 0.0f, 0.0f);
     int size = neighbors.size();
     for (int i = 0; i < size; i++)
@@ -205,14 +222,25 @@ void FluidParticle::ApplyViscosityForce() {
         glm::vec3 velDiff = neighbors[i]->velocity - velocity;
         float q = glm::length(position - neighbors[i]->position) / smoothingLength;
         tot = tot + ((velDiff / neighbors[i]->localDensity) * GetViscousLagrangian(q));
-        /*if (debug)
-        {
-            cout << " The neigbors local des"
-        }*/
+
     }
     glm::vec3 res = viscosity * mass * tot;
 
     ApplyForce(viscosity * mass * tot);
+    */
+    
+    
+    
+    glm::vec3 fviscosity = glm::vec3(0);
+    
+    for(int i=0; i<neighbors.size(); i++){
+        glm::vec3 r = position - neighbors[i]->position;
+
+        float wviscosityLaplacian = CalWViscosityLaplacian(r, smoothingLength);
+        fviscosity += viscosity * (neighbors[i]->mass / neighbors[i]->localDensity) * (neighbors[i]->velocity - velocity) * wviscosityLaplacian;
+    }
+    ApplyForce(fviscosity);
+     
 }
 
 
@@ -241,12 +269,14 @@ float FluidParticle::Kernel(glm::vec3 nPosition, glm::vec3 locPosition)
 void FluidParticle::UpdateLocalDensity()
 {
     int size = neighbors.size();
-    float tot = 0;
+    float temp = 0;
     for (int i = 0; i < size; i++)
     {
-        tot += (Kernel(neighbors[i]->position, position));
+        glm::vec3 r = position - neighbors[i]->position;
+        float w = CalWPoly(r, smoothingLength);
+        temp += neighbors[i]->mass * w;
     }
-    localDensity = mass * tot;
+    localDensity = temp;
     
 }
 
@@ -284,3 +314,32 @@ float FluidParticle::CalWPolyLaplacian(glm::vec3 r, float h){
     }
     return result;
 }
+
+
+glm::vec3 FluidParticle::CalWSpikyGradient(glm::vec3 r, float h){
+    float r_norm = glm::length(r);
+    glm::vec3 result;
+    if(r_norm<=h && r_norm > glm::epsilon<float>()) {
+        result = ((- 45.f * (float)glm::pow(h-r_norm,2)) / (r_norm * PI * (float)glm::pow(h,6))) * r;
+    }
+    return result;
+}
+
+
+float FluidParticle::CalWViscosityLaplacian(glm::vec3 r, float h){
+    float r_norm = glm::length(r);
+    float result = 0;
+    if(r_norm<=h && r_norm > glm::epsilon<float>()) {
+        result = 45.f / (PI * (float)glm::pow(h,6)) * (h - r_norm);
+    }
+    return result;
+}
+
+
+
+
+
+void FluidParticle::CalTension(){
+    
+}
+

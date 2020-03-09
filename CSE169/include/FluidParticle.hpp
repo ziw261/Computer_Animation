@@ -26,10 +26,10 @@ public:
     float localDensity;
     float pressure;
     float viscosity;
-    const float restDensity = 1.2f;
+    const float restDensity = 1.f;
     float supportRadius;
     float smoothingLength;
-    const float stiffConst = 1e3;
+    const float stiffConst = 1.f;
     const float springConst = 20.0f;
     const float dampFact = 2.0f;
     
@@ -43,6 +43,12 @@ public:
     glm::vec3 CalWPolyGradient(glm::vec3 r, float h);
     float CalWPolyLaplacian(glm::vec3 r, float h);
     glm::vec3 CalWSpikyGradient(glm::vec3 r, float h);
+    float CalWViscosityLaplacian(glm::vec3 r, float h);
+    void UpdateLocalDensity();
+    void UpdatePressure();
+
+    
+    void CalTension();
     
     
     void ApplyViscosityForce();
@@ -50,8 +56,6 @@ public:
     void ApplyRepulsion();
     int HandleCollision();
     float Kernel(glm::vec3 nPosition, glm::vec3 locPosition);
-    void UpdateLocalDensity();
-    void UpdatePressure();
     void UpdateForces();
     void HandleImpulse(int collisionType);
     //glm::vec3 GetPressureGradient();
