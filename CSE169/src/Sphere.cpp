@@ -10,8 +10,8 @@
 
 Sphere::Sphere(float radius){
     
-    numLon = 10;
-    numLat = 10;
+    numLon = 30;
+    numLat = 30;
     
     this->radius = radius;
     CreateVerts();
@@ -59,7 +59,12 @@ void Sphere::DrawSetting(){
 void Sphere::Draw(const glm::mat4 &viewProjMtx, GLuint shader){
     // actiavte the shader program
     //glm::mat4 model =  glm::mat4(1.0f);
+    
     glm::mat4 model = toWorld;
+    
+    /* Attention*/
+    //glm::mat4 model = viewProjMtx * toWorld;
+   
     glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
 
     glEnable(GL_BLEND);

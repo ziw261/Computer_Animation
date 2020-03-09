@@ -170,4 +170,5 @@ dependencies: /Users/aki/GitHub/CSE169_Animation/CSE169/src/Fluid.cpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/../gtc/../matrix.hpp \
   /usr/local/Cellar/glm/0.9.9.5/include/glm/gtx/transform.inl \
   /Users/aki/GitHub/CSE169_Animation/CSE169/include/Particle.hpp \
-  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Sphere.hpp
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Sphere.hpp \
+  /Users/aki/GitHub/CSE169_Animation/CSE169/include/Cube.h

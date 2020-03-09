@@ -23,14 +23,43 @@ public:
     Sphere* sphere;
     vector<FluidParticle* > neighbors;
     
+    float localDensity;
+    float pressure;
+    float viscosity;
+    const float restDensity = 1.2f;
+    float supportRadius;
+    float smoothingLength;
+    const float stiffConst = 1e3;
+    const float springConst = 20.0f;
+    const float dampFact = 2.0f;
+    
     
     
     // Member Function
-    FluidParticle(glm::vec3 position, float radius);
-    void Update();
+    FluidParticle(glm::vec3 position, float radius, float supportRadius);
+    void Update(float deltaTime);
     void Draw(const glm::mat4& viewProjMtx, GLuint shader);
-    void ZeroForce();
-    void ApplyGravity();
+    float CalWPoly(glm::vec3 r, float h);
+    glm::vec3 CalWPolyGradient(glm::vec3 r, float h);
+    float CalWPolyLaplacian(glm::vec3 r, float h);
+    glm::vec3 CalWSpikyGradient(glm::vec3 r, float h);
+    
+    
+    void ApplyViscosityForce();
+    void ApplyPressureForce();
+    void ApplyRepulsion();
+    int HandleCollision();
+    float Kernel(glm::vec3 nPosition, glm::vec3 locPosition);
+    void UpdateLocalDensity();
+    void UpdatePressure();
+    void UpdateForces();
+    void HandleImpulse(int collisionType);
+    //glm::vec3 GetPressureGradient();
+    //glm::vec3 GetViscosityGradient();
+    glm::vec3 GetSpikyKernelGradient(float q, glm::vec3 posDiff);
+    float GetViscousLagrangian(float q);
+    glm::vec3 getKernelGradient(FluidParticle* nBor);
+    
 
     ~FluidParticle();
     

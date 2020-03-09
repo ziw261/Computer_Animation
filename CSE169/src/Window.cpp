@@ -78,6 +78,7 @@ bool Window::initializeObjects(int argc,char **argv)
     
     if(nowLoading == loadFluid){
         mainFluid = new Fluid();
+        Cam->SetDistance(40);
     }
     else if(nowLoading == loadCloth){
         isAirOn = true;
@@ -233,6 +234,9 @@ void Window::idleCallback()
         mainSkeleton->Update();
         mainSkin->Update();
         mainAnimation->Update(currentTime);
+    }
+    else if(nowLoading == loadFluid){
+        mainFluid->Update(0.013f);
     }
     
     //cerr<<mainAnimation->channels[3]->extrapOut<<endl;
