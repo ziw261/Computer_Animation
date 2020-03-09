@@ -23,7 +23,10 @@ public:
     float radius;
     float supportRadius;
     glm::vec3 gravity = glm::vec3(0,-9.8f,0);
-
+    const float springConst = 100.f;
+    const float dampFact = 5.f;
+    bool shouldBeBound = true;
+    
     int numParticles;
     Cube* boundCube;
     
@@ -35,6 +38,7 @@ public:
     void ZeroForce();
     void UpdateParticles(float deltaTime);
     void ApplyGravity();
+    void ApplyBound();
     
     
     void UpdateNeighbors();

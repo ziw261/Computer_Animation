@@ -38,16 +38,36 @@ void FluidParticle::Draw(const glm::mat4 &viewProjMtx, GLuint shader){
 void FluidParticle::UpdateForces(){
     ApplyPressureForce();
     ApplyViscosityForce();
-    ApplyRepulsion();
+    //ApplyRepulsion();
 }
 
 
 
 void FluidParticle::Update(float deltaTime){
+    //cerr << force.x << " " << force.y << " " << force.z << " " << endl;
     glm::vec3 acceleration = force/mass;
     //glm::vec3 acceleration = force/localDensity;
     velocity += acceleration * deltaTime;
     position += velocity * deltaTime;
+    
+    
+    float deCoeff = -1.0f;
+    
+    if(position.y < -10){
+        reBounceCounter++;
+        if(reBounceCounter > 15){
+            deCoeff = -0.9f;
+        }
+        position.y  = 2* (-10) -  position.y;
+        velocity.y = deCoeff * velocity.y;
+        velocity.x = (1-0.2) * velocity.x;
+        velocity.z = (1-0.2) * velocity.z;
+        //cerr << "been here" << endl;
+    }
+     
+     
+     
+     
     
 }
 
@@ -55,6 +75,7 @@ void FluidParticle::Update(float deltaTime){
 /* Attention */
 void FluidParticle::UpdatePressure(){
     pressure = stiffConst * (localDensity - restDensity);
+    //cerr << pressure << endl;
 }
 
 
@@ -118,7 +139,7 @@ void FluidParticle::ApplyPressureForce() {
 void FluidParticle::ApplyRepulsion()
 {
     int collisionType = HandleCollision();
-    if (collisionType == 2)
+    if (collisionType != 0)
     {
        
         HandleImpulse(collisionType);
@@ -181,7 +202,7 @@ void FluidParticle::HandleImpulse(int collisionType)
 {
     if (collisionType == 1)
     {
-        velocity.x = (velocity.x * -1.0f);
+        velocity.x = (velocity.x * -.5f);
     }
     if (collisionType == 2)
     {
@@ -189,7 +210,7 @@ void FluidParticle::HandleImpulse(int collisionType)
     }
     if (collisionType == 3)
     {
-        velocity.z = (velocity.z * -1.0f);
+        velocity.z = (velocity.z * -.5f);
     }
 }
 

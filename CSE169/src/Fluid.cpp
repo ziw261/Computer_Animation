@@ -31,7 +31,8 @@ void Fluid::Update(float deltaTime){
     
     /* Attention */
     UpdateParticleForces();
-    
+    ApplyBound();
+
     UpdateParticles(deltaTime);
 }
 
@@ -51,7 +52,7 @@ void Fluid::ZeroForce(){
 void Fluid::CreateSpheres(){
     int gridSize = 8;
     float diff = radius;
-    float y = 1.0f, z = -1.0f;
+    float y = 3.0f;
     for(int i=0; i<gridSize; i++){
         float z = -1.0f;
         for(int j=0; j<gridSize; j++){
@@ -66,7 +67,11 @@ void Fluid::CreateSpheres(){
         }
         y -= diff;
     }
+    
+    //cerr << fluidParticles[0]->position.x << " " << fluidParticles[0]->position.y << " " << fluidParticles[0]->position.z << " " << endl;
+    //cerr << fluidParticles[fluidParticles.size()-1]->position.x << " " << fluidParticles[fluidParticles.size()-1]->position.y << " " << fluidParticles[fluidParticles.size()-1]->position.z << " " << endl;
 }
+
 
 
 void Fluid::Draw(const glm::mat4 &viewProjMtx, GLuint shader){
@@ -126,4 +131,87 @@ void Fluid::UpdateParticleForces(){
     for(int i=0; i<fluidParticles.size(); i++){
         fluidParticles[i]->UpdateForces();
     }
+}
+
+
+
+void Fluid::ApplyBound(){
+    // x,z: -1 -> 2.5
+    // y    -0.5 -> 3
+    
+    float maxXZ = 0.f;
+    float minXZ = 0.f;
+    float minY = 0.f;
+    float disX = 0.f;
+    float disY = 0.f;
+    float disZ = 0.f;
+    float refelctCoeff = -1.0f;
+    int counter = 0;
+    
+    if(shouldBeBound){
+        maxXZ = 3.5f;
+        minXZ = -1.5f;
+        minY  = -0.9f;
+        
+        for(int i=0; i<fluidParticles.size(); i++){
+            if(fluidParticles[i]->position.x + radius >= maxXZ){
+                glm::vec3 e = glm::vec3(1.0f,0.0f,0.0f);
+                float l = 0.5f + disX - fluidParticles[i]->position.x;
+                float fsd = -1.0f * springConst * (radius - l) - dampFact * (glm::dot(e, fluidParticles[i]->velocity));
+                glm::vec3 f1 = fsd * e;
+                fluidParticles[i]->ApplyForce(f1);
+            }
+            if(fluidParticles[i]->position.x + radius <= minXZ){
+                glm::vec3 e = glm::vec3(-1.0f,0.0f,0.0f);
+                float l = 0.5f + disX + fluidParticles[i]->position.x;
+                float fsd = -1.0f * springConst * (radius - l) - dampFact * (glm::dot(e, fluidParticles[i]->velocity));
+                glm::vec3 f1 = fsd * e;
+                fluidParticles[i]->ApplyForce(f1);
+            }
+            if(fluidParticles[i]->position.z + radius <= minXZ){
+                glm::vec3 e = glm::vec3(0.0f,0.0f,-1.0f);
+                float l = 0.5f + disZ + fluidParticles[i]->position.z;
+                float fsd = -1.0f * springConst * (radius - l) - dampFact * (glm::dot(e, fluidParticles[i]->velocity));
+                glm::vec3 f1 = fsd * e;
+                fluidParticles[i]->ApplyForce(f1);
+            }
+            if(fluidParticles[i]->position.z + radius >= maxXZ){
+                glm::vec3 e = glm::vec3(0.0f,0.0f,1.0f);
+                float l = 0.5f + disZ - fluidParticles[i]->position.z;
+                float fsd = -1.0f * springConst * (radius - l) - dampFact * (glm::dot(e, fluidParticles[i]->velocity));
+                glm::vec3 f1 = fsd * e;
+                fluidParticles[i]->ApplyForce(f1);
+            }
+            if(fluidParticles[i]->position.y + radius <= minY){
+                glm::vec3 e = glm::vec3(0.0f,-1.0f,0.0f);
+                float l = 0.5f + disY + fluidParticles[i]->position.y;
+                float fsd = -1.0f * springConst * (radius - l) - dampFact * (glm::dot(e, fluidParticles[i]->velocity));
+                glm::vec3 f1 = fsd * e;
+                fluidParticles[i]->ApplyForce(f1);
+            }
+        }
+    } else {
+        /*
+        counter ++;
+        if(counter > 5){
+            refelctCoeff = -0.9f;
+        }
+        
+        for(int i=0; i<fluidParticles.size(); i++){
+            if(fluidParticles[i]->position.y < -10){
+                    
+                fluidParticles[i]->position.y  = 2* (-10) - fluidParticles[i]->position.y;
+                fluidParticles[i]->velocity.y = refelctCoeff * fluidParticles[i]->velocity.y;
+                fluidParticles[i]->velocity.x = (1-0.2) * fluidParticles[i]->velocity.x;
+                fluidParticles[i]->velocity.z = (1-0.2) * fluidParticles[i]->velocity.z;
+                //cerr << "been here" << endl;
+            }
+        }
+         */
+         
+    }
+    
+    
+    
+    
 }

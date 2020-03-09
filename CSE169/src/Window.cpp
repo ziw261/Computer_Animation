@@ -450,6 +450,9 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 if(nowLoading == loadCloth){
                     mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,0.0f,0.1f));
                 }
+                else if (nowLoading == loadFluid){
+                    mainFluid->shouldBeBound = false;
+                }
                 break;
                 
             case GLFW_KEY_E:

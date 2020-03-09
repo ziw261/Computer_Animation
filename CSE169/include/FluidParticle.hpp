@@ -22,6 +22,7 @@ public:
     float radius;
     Sphere* sphere;
     vector<FluidParticle* > neighbors;
+    int reBounceCounter = 0;
     
     float localDensity;
     float pressure;
@@ -30,8 +31,8 @@ public:
     float supportRadius;
     float smoothingLength;
     const float stiffConst = 1.f;
-    const float springConst = 20.0f;
-    const float dampFact = 2.0f;
+    const float springConst = 100.0f;
+    const float dampFact = 5.0f;
     
     
     
@@ -46,6 +47,7 @@ public:
     float CalWViscosityLaplacian(glm::vec3 r, float h);
     void UpdateLocalDensity();
     void UpdatePressure();
+
 
     
     void CalTension();
