@@ -10,7 +10,7 @@
 
 Fluid::Fluid(){
     radius = 0.5f;
-    supportRadius = 1.1f;
+    supportRadius = 1.5f;
     //boundCube = new Cube(glm::vec3(-30.0f,-30.0f,0.0f), glm::vec3(30.0f,30.0f,0.0f));
     CreateSpheres();
     //cerr << fluidParticles.size() << endl;
@@ -50,9 +50,9 @@ void Fluid::ZeroForce(){
 }
 
 void Fluid::CreateSpheres(){
-    int gridSize = 8;
-    float diff = radius;
-    float y = 3.0f;
+    gridSize = 10;
+    float diff = 1*radius;
+    float y = 5.0f;
     for(int i=0; i<gridSize; i++){
         float z = -1.0f;
         for(int j=0; j<gridSize; j++){
@@ -62,12 +62,18 @@ void Fluid::CreateSpheres(){
                 //cerr << newFlu->position.x << " " << newFlu->position.y << " " << newFlu->position.z << " " << endl;
                 fluidParticles.push_back(newFlu);
                 x+= diff;
+                //cerr << x << endl;
             }
             z+= diff;
         }
         y -= diff;
     }
     
+    maxXZ = gridSize/2.f - 0.5f - .5f;
+    minXZ = -1.5f;
+    minY  = 5 - (gridSize/2 -0.5f) - .1f;
+    sideHeight = minY;
+    //cerr << maxXZ << " " << minXZ << " " << minY << endl;
     //cerr << fluidParticles[0]->position.x << " " << fluidParticles[0]->position.y << " " << fluidParticles[0]->position.z << " " << endl;
     //cerr << fluidParticles[fluidParticles.size()-1]->position.x << " " << fluidParticles[fluidParticles.size()-1]->position.y << " " << fluidParticles[fluidParticles.size()-1]->position.z << " " << endl;
 }
@@ -139,21 +145,24 @@ void Fluid::ApplyBound(){
     // x,z: -1 -> 2.5
     // y    -0.5 -> 3
     
-    float maxXZ = 0.f;
-    float minXZ = 0.f;
-    float minY = 0.f;
+
     float disX = 0.f;
     float disY = 0.f;
     float disZ = 0.f;
-    float refelctCoeff = -1.0f;
-    int counter = 0;
+
     
-    if(shouldBeBound){
-        maxXZ = 3.5f;
-        minXZ = -1.5f;
-        minY  = -0.9f;
-        
+    if(!shouldBeBound){
+        minY = -10.0f;
+    }
+        //minY  = -0.9f;
         for(int i=0; i<fluidParticles.size(); i++){
+            if(fluidParticles[i]->isFreed){
+                continue;
+            }
+            if(!shouldBeBound && fluidParticles[i]->position.y < sideHeight - 10*radius){
+                fluidParticles[i]->isFreed = true;
+                continue;
+            }
             if(fluidParticles[i]->position.x + radius >= maxXZ){
                 glm::vec3 e = glm::vec3(1.0f,0.0f,0.0f);
                 float l = 0.5f + disX - fluidParticles[i]->position.x;
@@ -190,7 +199,7 @@ void Fluid::ApplyBound(){
                 fluidParticles[i]->ApplyForce(f1);
             }
         }
-    } else {
+    //} else {
         /*
         counter ++;
         if(counter > 5){
@@ -209,7 +218,7 @@ void Fluid::ApplyBound(){
         }
          */
          
-    }
+    
     
     
     

@@ -38,6 +38,7 @@ void FluidParticle::Draw(const glm::mat4 &viewProjMtx, GLuint shader){
 void FluidParticle::UpdateForces(){
     ApplyPressureForce();
     ApplyViscosityForce();
+    //CalTension();
     //ApplyRepulsion();
 }
 
@@ -75,7 +76,7 @@ void FluidParticle::Update(float deltaTime){
 /* Attention */
 void FluidParticle::UpdatePressure(){
     pressure = stiffConst * (localDensity - restDensity);
-    //cerr << pressure << endl;
+    //cerr << localDensity << endl;
 }
 
 
@@ -119,7 +120,7 @@ void FluidParticle::ApplyPressureForce() {
     }
     glm::vec3 res = (-1.0f * mass * tot);
     ApplyForce(res);
-     */
+    */
      
     
     
@@ -361,6 +362,27 @@ float FluidParticle::CalWViscosityLaplacian(glm::vec3 r, float h){
 
 
 void FluidParticle::CalTension(){
+    glm::vec3 color_gradient = glm::vec3(0);
+    float color_laplacian = 0;
+    glm::vec3 ftension = glm::vec3(0);
     
+    for(int i=0; i<neighbors.size();i++){
+        glm::vec3 rvec = position - neighbors[i]->position;
+
+        //compute gradient of color field
+        glm::vec3 wpoly6gradient = CalWPolyGradient(rvec, smoothingLength);
+        color_gradient += (neighbors[i]->mass / neighbors[i]->localDensity) * wpoly6gradient;
+
+        //compute laplacian of color filed
+        float wpoly6Laplacian = CalWPolyLaplacian(rvec, smoothingLength);
+        color_laplacian += (neighbors[i]->mass / neighbors[i]->localDensity) * wpoly6Laplacian;
+    }
+    
+    
+    if(glm::length(color_gradient) > glm::epsilon<float>()){
+        ftension =  -.01f * color_laplacian * glm::normalize(color_gradient);
+    }
+    
+    ApplyForce(ftension);
 }
 

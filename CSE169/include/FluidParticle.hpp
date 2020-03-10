@@ -15,6 +15,8 @@
 #include "Sphere.hpp"
 #include <iostream>
 
+
+
 class FluidParticle : public Particle{
 public:
     
@@ -27,12 +29,13 @@ public:
     float localDensity;
     float pressure;
     float viscosity;
-    const float restDensity = 1.f;
+    const float restDensity = 5.f;
     float supportRadius;
     float smoothingLength;
     const float stiffConst = 1.f;
     const float springConst = 100.0f;
     const float dampFact = 5.0f;
+    bool isFreed = false;
     
     
     

@@ -236,7 +236,7 @@ void Window::idleCallback()
         mainAnimation->Update(currentTime);
     }
     else if(nowLoading == loadFluid){
-        mainFluid->Update(0.01f);
+        mainFluid->Update(0.02f);
     }
     
     //cerr<<mainAnimation->channels[3]->extrapOut<<endl;
@@ -406,6 +406,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                         std::cout << "dof z value." << std::endl;
                     }
                 }
+                
                 break;
             
             case GLFW_KEY_DOWN:
@@ -426,11 +427,18 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 if(nowLoading == loadCloth){
                     mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,0.1f,0.0f));
                 }
+                else if(nowLoading == loadFluid){
+                    mainFluid->maxXZ += mainFluid->radius;
+                }
+
                 break;
                 
             case GLFW_KEY_A:
                 if(nowLoading == loadCloth){
                     mainParticleSystem->MoveFixedPoint(glm::vec3(-0.1f,0.0f,0.0f));
+                }
+                else if(nowLoading == loadFluid){
+                    mainFluid->minXZ -= mainFluid->radius;
                 }
                 break;
             
@@ -438,11 +446,27 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 if(nowLoading == loadCloth){
                     mainParticleSystem->MoveFixedPoint(glm::vec3(0.0f,-0.1f,0.0f));
                 }
+                else if(nowLoading == loadFluid){
+                    if(mainFluid->maxXZ - mainFluid->radius <= mainFluid->minXZ){
+                        mainFluid->maxXZ = mainFluid->maxXZ;
+                    }else {
+                        mainFluid->maxXZ -= mainFluid->radius;
+                    }
+                }
+                //cerr << mainFluid->minXZ << " " << mainFluid->maxXZ << endl;
                 break;
             
             case GLFW_KEY_D:
                 if(nowLoading == loadCloth){
                     mainParticleSystem->MoveFixedPoint(glm::vec3(0.1f,0.0f,0.0f));
+                }
+                else if(nowLoading == loadFluid){
+                    if(mainFluid->minXZ + mainFluid->radius >= mainFluid->maxXZ){
+                        mainFluid->minXZ = mainFluid->minXZ;
+                    }else {
+                        mainFluid->minXZ += mainFluid->radius;
+                    }
+                    //cerr << mainFluid->minXZ << " " << mainFluid->maxXZ << endl;
                 }
                 break;
             

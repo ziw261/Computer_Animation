@@ -26,6 +26,13 @@ public:
     const float springConst = 100.f;
     const float dampFact = 5.f;
     bool shouldBeBound = true;
+    int gridSize = 8;
+    float maxXZ = 0.f;
+    float minXZ = 0.f;
+    float minY = 0.f;
+    float sideHeight = 0.f;
+    
+    
     
     int numParticles;
     Cube* boundCube;
