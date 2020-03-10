@@ -236,7 +236,7 @@ void Window::idleCallback()
         mainAnimation->Update(currentTime);
     }
     else if(nowLoading == loadFluid){
-        mainFluid->Update(0.02f);
+        mainFluid->Update(0.015f);
     }
     
     //cerr<<mainAnimation->channels[3]->extrapOut<<endl;

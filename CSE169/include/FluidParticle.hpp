@@ -29,13 +29,13 @@ public:
     float localDensity;
     float pressure;
     float viscosity;
-    const float restDensity = 5.f;
+    const float restDensity = 5.f;  // 7.0f     //1.0f
     float supportRadius;
     float smoothingLength;
-    const float stiffConst = 5.f;
+    const float stiffConst = 5.f;  //5.0f       //1.0f
     const float springConst = 100.0f;
     const float dampFact = 5.0f;
-    bool isFreed = false;
+    bool isFreed = false;        // true
     
     
     
@@ -44,29 +44,16 @@ public:
     void Update(float deltaTime);
     void Draw(const glm::mat4& viewProjMtx, GLuint shader);
     float CalWPoly(glm::vec3 r, float h);
-    glm::vec3 CalWPolyGradient(glm::vec3 r, float h);
-    float CalWPolyLaplacian(glm::vec3 r, float h);
     glm::vec3 CalWSpikyGradient(glm::vec3 r, float h);
     float CalWViscosityLaplacian(glm::vec3 r, float h);
     void UpdateLocalDensity();
     void UpdatePressure();
 
-
-    
-    void CalTension();
-    
     
     void ApplyViscosityForce();
     void ApplyPressureForce();
     void ApplyRepulsion();
-    int HandleCollision();
-    float Kernel(glm::vec3 nPosition, glm::vec3 locPosition);
-    void UpdateForces();
-    void HandleImpulse(int collisionType);
-    glm::vec3 GetSpikyKernelGradient(float q, glm::vec3 posDiff);
-    float GetViscousLagrangian(float q);
-    glm::vec3 getKernelGradient(FluidParticle* nBor);
-    
+    void UpdateForces();    
 
     ~FluidParticle();
     

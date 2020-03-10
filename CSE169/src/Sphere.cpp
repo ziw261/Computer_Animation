@@ -61,9 +61,6 @@ void Sphere::Draw(const glm::mat4 &viewProjMtx, GLuint shader){
     //glm::mat4 model =  glm::mat4(1.0f);
     
     glm::mat4 model = toWorld;
-    
-    /* Attention*/
-    //glm::mat4 model = viewProjMtx * toWorld;
    
     glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
 

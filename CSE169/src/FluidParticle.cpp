@@ -48,7 +48,7 @@ void FluidParticle::Update(float deltaTime){
     
     if(position.y < -10){
         reBounceCounter++;
-        if(reBounceCounter > 15){
+        if(reBounceCounter > 7){
             deCoeff = -0.9f;
         }
         position.y  = 2* (-10) -  position.y;
