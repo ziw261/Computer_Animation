@@ -69,7 +69,7 @@ void Fluid::CreateSpheres(){
         y -= diff;
     }
     
-    maxXZ = gridSize/2.f - 0.5f - .5f;
+    maxXZ = gridSize/2.f - 0.5f - .5f + .5f;
     minXZ = -1.5f;
     minY  = 5 - (gridSize/2 -0.5f) - .1f;
     sideHeight = minY;
@@ -160,6 +160,7 @@ void Fluid::ApplyBound(){
                 continue;
             }
             if(!shouldBeBound && fluidParticles[i]->position.y < sideHeight - 10*radius){
+                //cerr << sideHeight - 20*radius << endl;;
                 fluidParticles[i]->isFreed = true;
                 continue;
             }
