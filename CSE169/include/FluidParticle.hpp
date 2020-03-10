@@ -32,7 +32,7 @@ public:
     const float restDensity = 5.f;
     float supportRadius;
     float smoothingLength;
-    const float stiffConst = 7.f;
+    const float stiffConst = 5.f;
     const float springConst = 100.0f;
     const float dampFact = 5.0f;
     bool isFreed = false;
@@ -63,8 +63,6 @@ public:
     float Kernel(glm::vec3 nPosition, glm::vec3 locPosition);
     void UpdateForces();
     void HandleImpulse(int collisionType);
-    //glm::vec3 GetPressureGradient();
-    //glm::vec3 GetViscosityGradient();
     glm::vec3 GetSpikyKernelGradient(float q, glm::vec3 posDiff);
     float GetViscousLagrangian(float q);
     glm::vec3 getKernelGradient(FluidParticle* nBor);
