@@ -66,7 +66,7 @@ void Fluid::CreateSpheres(){
     maxXZ = gridSize/2.f - 0.5f - .5f + .5f;
     //maxXZ = 9.f;
     minXZ = -1.5f;
-    minY  = 5 - (gridSize/2 -0.5f) - .1f;
+    minY  = 5 - (gridSize/2 -0.5f) - .5f;
     //minY = -4.1f;
     sideHeight = minY;
     //cerr << fluidParticles.size() << endl;
@@ -143,39 +143,63 @@ void Fluid::ApplyBound(){
             fluidParticles[i]->isFreed = true;
             continue;
         }
-        if(fluidParticles[i]->position.x + radius >= maxXZ){
+        if(fluidParticles[i]->position.x >= maxXZ){
+            /*
             glm::vec3 e = glm::vec3(1.0f,0.0f,0.0f);
             float l = 0.5f - fluidParticles[i]->position.x;
             float fsd = -1.0f * springConst * (radius - l) - dampFact * (glm::dot(e, fluidParticles[i]->velocity));
             glm::vec3 f1 = fsd * e;
+             */
+            
+            float k = -1.f * springConst * (fluidParticles[i]->position.x - maxXZ);
+            glm::vec3 f1 = glm::vec3(k,0,0);
             fluidParticles[i]->ApplyForce(f1);
         }
-        if(fluidParticles[i]->position.x + radius <= minXZ){
+        if(fluidParticles[i]->position.x <= minXZ){
+            /*
             glm::vec3 e = glm::vec3(-1.0f,0.0f,0.0f);
             float l = 0.5f + fluidParticles[i]->position.x;
             float fsd = -1.0f * springConst * (radius - l) - dampFact * (glm::dot(e, fluidParticles[i]->velocity));
             glm::vec3 f1 = fsd * e;
+             */
+            float k = -1.f * springConst * (fluidParticles[i]->position.x - minXZ);
+            glm::vec3 f1 = glm::vec3(k,0,0);
             fluidParticles[i]->ApplyForce(f1);
         }
-        if(fluidParticles[i]->position.z + radius <= minXZ){
+        if(fluidParticles[i]->position.z <= minXZ){
+            /*
             glm::vec3 e = glm::vec3(0.0f,0.0f,-1.0f);
             float l = 0.5f + fluidParticles[i]->position.z;
             float fsd = -1.0f * springConst * (radius - l) - dampFact * (glm::dot(e, fluidParticles[i]->velocity));
             glm::vec3 f1 = fsd * e;
             fluidParticles[i]->ApplyForce(f1);
+             */
+            float k = -1.f * springConst * (fluidParticles[i]->position.z - minXZ);
+            glm::vec3 f1 = glm::vec3(0,0,k);
+            fluidParticles[i]->ApplyForce(f1);
         }
-        if(fluidParticles[i]->position.z + radius >= maxXZ){
+        if(fluidParticles[i]->position.z >= maxXZ){
+            /*
             glm::vec3 e = glm::vec3(0.0f,0.0f,1.0f);
             float l = 0.5f - fluidParticles[i]->position.z;
             float fsd = -1.0f * springConst * (radius - l) - dampFact * (glm::dot(e, fluidParticles[i]->velocity));
             glm::vec3 f1 = fsd * e;
             fluidParticles[i]->ApplyForce(f1);
+             */
+            float k = -1.f * springConst * (fluidParticles[i]->position.z - maxXZ);
+            glm::vec3 f1 = glm::vec3(0,0,k);
+            fluidParticles[i]->ApplyForce(f1);
         }
-        if(fluidParticles[i]->position.y + radius <= minY){
+        if(fluidParticles[i]->position.y <= minY){
+            /*
             glm::vec3 e = glm::vec3(0.0f,-1.0f,0.0f);
             float l = 0.5f + fluidParticles[i]->position.y;
             float fsd = -1.0f * springConst * (radius - l) - dampFact * (glm::dot(e, fluidParticles[i]->velocity));
             glm::vec3 f1 = fsd * e;
+            fluidParticles[i]->ApplyForce(f1);
+             */
+            float k = -1.f * springConst * (fluidParticles[i]->position.y - minY);
+            glm::vec3 f1 = glm::vec3(0,k,0);
             fluidParticles[i]->ApplyForce(f1);
         }
     }

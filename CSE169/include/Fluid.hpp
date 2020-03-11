@@ -24,7 +24,7 @@ public:
     float supportRadius;
     glm::vec3 gravity = glm::vec3(0,-9.8f,0);
     const float springConst = 100.f;
-    const float dampFact = 5.f;
+    const float dampFact = 0.f;
     bool shouldBeBound = true;    //false
     int gridSize = 8;
     float maxXZ = 0.f;

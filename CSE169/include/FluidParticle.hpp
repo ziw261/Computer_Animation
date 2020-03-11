@@ -33,8 +33,8 @@ public:
     float supportRadius;
     float smoothingLength;
     const float stiffConst = 5.f;  //5.0f       //1.0f
-    const float springConst = 100.0f;
-    const float dampFact = 5.0f;
+    const float springConst = 10.0f;
+    const float dampFact = 0.0f;
     bool isFreed = false;        // true
     
     
