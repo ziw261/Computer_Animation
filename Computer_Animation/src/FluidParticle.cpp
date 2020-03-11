@@ -18,7 +18,7 @@ FluidParticle::FluidParticle(glm::vec3 position, float radius, float supportRadi
     sphere = new Sphere(radius);
     this->smoothingLength = supportRadius;
     localDensity = pressure = 0.0f;
-    viscosity = .3f;
+    viscosity = .5f;
     
 }
 

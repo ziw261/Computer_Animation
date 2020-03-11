@@ -31,7 +31,8 @@ int Window::nowLoading = -1;
 int Window::loadAnimation = 0;
 int Window::loadCloth = 1;
 int Window::loadFluid = 2;
-
+int Window::loadSkeleton = 3;
+int Window::loadSkin = 4;
 
 // Joint selection Properties
 int Window::currentJointIndex = 0;
@@ -76,7 +77,22 @@ bool Window::initializeObjects(int argc,char **argv)
     // Decide to what to load
     nowLoading = loadFluid;
     
-    if(nowLoading == loadFluid){
+    if(nowLoading == loadSkeleton){
+        mainSkeleton = new Skeleton();
+        if(argc == 1){
+            mainSkeleton->Load("dragon.skel");
+        }
+        //Cam->SetAspect(20);
+    }
+    else if(nowLoading == loadSkin){
+        mainSkeleton = new Skeleton();
+        mainSkeleton -> Load("wasp.skel");
+        jointGroup = mainSkeleton->GetJointGroup();
+        mainSkin = new Skin(jointGroup);
+        mainSkin->Start("wasp.skin");
+
+    }
+    else if(nowLoading == loadFluid){
         mainFluid = new Fluid();
         Cam->SetDistance(40);
     }
@@ -86,6 +102,7 @@ bool Window::initializeObjects(int argc,char **argv)
        // mainParticleSystem->airVelocity = glm::vec3(0);
     }
     else if(nowLoading == loadAnimation){
+        //shouldPause = false;
         mainSkeleton = new Skeleton();
         
         if(argc == 1) {
@@ -113,6 +130,7 @@ bool Window::initializeObjects(int argc,char **argv)
         if(argc == 1){
             startTime = clock();
             mainAnimation->Load("wasp_walk.anim");
+            //cerr << "been here" << endl;
             //mainAnimation->EvaluateAll(0);
         }
     }
@@ -220,7 +238,7 @@ void Window::idleCallback()
     
     //currentTime = (float)(clock()-startTime)/CLOCKS_PER_SEC;  //1000000
     if(!shouldPause){
-        currentTime = (float)(clock()-startTime)/1000000000;  //1000000
+        currentTime = (float)(clock()-startTime)/1000000;  //1000000     1000000000
     }
 
 	// Perform any updates as necessary. 
@@ -237,6 +255,13 @@ void Window::idleCallback()
     }
     else if(nowLoading == loadFluid){
         mainFluid->Update(0.015f);
+    }
+    else if(nowLoading == loadSkeleton){
+        mainSkeleton->Update();
+    }
+    else if(nowLoading == loadSkin){
+        mainSkeleton->Update();
+        mainSkin->Update();
     }
     
     //cerr<<mainAnimation->channels[3]->extrapOut<<endl;
@@ -266,7 +291,12 @@ void Window::displayCallback(GLFWwindow* window)
     else if(nowLoading == loadFluid){
         mainFluid ->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
     }
-    
+    else if(nowLoading == loadSkeleton){
+        mainSkeleton ->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
+    }
+    else if(nowLoading == loadSkin){
+        mainSkin->Draw(Cam->GetViewProjectMtx(), Window::shaderProgram);
+    }
     
 	// Gets events, including input such as keyboard and mouse or window resizing.
 	glfwPollEvents();
@@ -349,28 +379,28 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 break;
                 
             case GLFW_KEY_X:
-                if(nowLoading == loadAnimation){
+                if(nowLoading == loadSkin){
                     selectJoint(0);
                     std::cout<<"Switching to change dof x value" << std::endl;
                 }
                 break;
                 
             case GLFW_KEY_Y:
-                if(nowLoading == loadAnimation){
+                if(nowLoading == loadSkin){
                     selectJoint(1);
                     std::cout<<"Switching to change dof y value" << std::endl;
                 }
                 break;
                 
             case GLFW_KEY_Z:
-                if(nowLoading == loadAnimation){
+                if(nowLoading == loadSkin){
                     selectJoint(2);
                     std::cout<<"Switching to change dof z value" << std::endl;
                 }
                 break;
             
             case GLFW_KEY_RIGHT:
-                if(nowLoading == loadAnimation){
+                if(nowLoading == loadSkin){
                     if(currentJointIndex+1 >= jointGroup.size()){
                         currentJointIndex = (int)(jointGroup.size()-1);
                     } else {
@@ -382,7 +412,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 break;
                 
             case GLFW_KEY_LEFT:
-                if(nowLoading == loadAnimation){
+                if(nowLoading == loadSkin){
                     if(currentJointIndex-1 < 0){
                         currentJointIndex = 0;
                     } else {
@@ -395,7 +425,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 break;
             
             case GLFW_KEY_UP:
-                if(nowLoading == loadAnimation){
+                if(nowLoading == loadSkin){
                     changeDof(0.2);
                     std::cout << "Now increasing "<<jointGroup[currentJointIndex]->GetName() << "'s ";
                     if(xyzChoice == 0){
@@ -406,11 +436,13 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                         std::cout << "dof z value." << std::endl;
                     }
                 }
-                
+                else if(nowLoading == loadSkeleton){
+                    Cam->Distance += 1;
+                }
                 break;
             
             case GLFW_KEY_DOWN:
-                if(nowLoading == loadAnimation){
+                if(nowLoading == loadSkin){
                     changeDof(-0.2);
                     std::cout << "Now decreasing "<<jointGroup[currentJointIndex]->GetName() << "'s ";
                     if(xyzChoice == 0){
@@ -420,6 +452,10 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     } else {
                         std::cout << "dof z value." << std::endl;
                     }
+                }
+                else if(nowLoading == loadSkeleton){
+                    Cam->Distance -= 1;
+
                 }
                 break;
             

@@ -65,6 +65,8 @@ public:
     static int loadAnimation;
     static int loadCloth;
     static int loadFluid;
+    static int loadSkeleton;
+    static int loadSkin;
     
 	// Shader Program 
 	static GLuint shaderProgram;
