@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/aki/GitHub/Computer_Animation/Computer_Animation/src/dof.cpp \
-  /Users/aki/GitHub/Computer_Animation/Computer_Animation/include/dof.hpp
+  /Users/aki/Developer/GitHub/Computer_Animation/Computer_Animation/src/dof.cpp \
+  /Users/aki/Developer/GitHub/Computer_Animation/Computer_Animation/include/dof.hpp

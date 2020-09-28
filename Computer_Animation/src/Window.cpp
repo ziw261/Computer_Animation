@@ -57,7 +57,7 @@ GLuint Window::shaderProgram;
 bool Window::initializeProgram() {
 
 	// Create a shader program with a vertex shader and a fragment shader.
-	shaderProgram = LoadShaders("/Users/aki/GitHub/Computer_Animation/Computer_Animation/shaders/shader.vert", "/Users/aki/GitHub/Computer_Animation/Computer_Animation/shaders/shader.frag");
+	shaderProgram = LoadShaders("/Users/aki/Developer/GitHub/Computer_Animation/Computer_Animation/shaders/shader.vert", "/Users/aki/Developer/GitHub/Computer_Animation/Computer_Animation/shaders/shader.frag");
 
 	// Check the shader program.
 	if (!shaderProgram)
@@ -75,7 +75,7 @@ bool Window::initializeObjects(int argc,char **argv)
 	cube = new Cube();
     
     // Decide to what to load
-    nowLoading = loadFluid;
+    nowLoading = loadCloth;
     
     if(nowLoading == loadSkeleton){
         mainSkeleton = new Skeleton();

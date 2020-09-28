@@ -453,12 +453,12 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/glfw/3.3.1/include,
-					/usr/local/Cellar/glm/0.9.9.5/include,
+					/usr/local/Cellar/glfw/3.3.2/include,
+					/usr/local/Cellar/glm/0.9.9.8/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Cellar/glfw/3.3.1/lib,
+					/usr/local/Cellar/glfw/3.3.2/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -470,12 +470,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				GCC_OPTIMIZATION_LEVEL = s;
 				HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/glfw/3.3.1/include,
-					/usr/local/Cellar/glm/0.9.9.5/include,
+					/usr/local/Cellar/glfw/3.3.2/include,
+					/usr/local/Cellar/glm/0.9.9.8/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Cellar/glfw/3.3.1/lib,
+					/usr/local/Cellar/glfw/3.3.2/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
