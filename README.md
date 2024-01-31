@@ -1,13 +1,13 @@
 # Demo
 1. Fluid Simulation
-![](https://github.com/ziw261/Computer_Animation/Demo/Fluid_Demo.gif)
+![](https://github.com/ziw261/Computer_Animation/blob/master/Demo/Fluid_Demo.gif)
 2. Cloth Simulation
-![](https://github.com/ziw261/Computer_Animation/Demo/Cloth_Demo.gif)
+![](https://github.com/ziw261/Computer_Animation/blob/master/Demo/Cloth_Demo.gif)
 3. Animation
-![](https://github.com/ziw261/Computer_Animation/Demo/Animation_Demo.gif)
-4. Skin with multiple degrees of freedom to change
-![](https://github.com/ziw261/Computer_Animation/Demo/Skin_Demo.gif)
-5. Skeleton
+![](https://github.com/ziw261/Computer_Animation/blob/master/Demo/Animation_Demo.gif)
+5. Skin with multiple degrees of freedom to change
+![](https://github.com/ziw261/Computer_Animation/blob/master/Demo/Skin_Demo.gif)
+6. Skeleton
 ![image](https://github.com/ziw261/Computer_Animation/assets/32504776/86a23e16-6928-4457-9a0e-bf65e575ed3b)
 
 # Reference
