@@ -6,6 +6,13 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// File Path
+static const char* dragonSkeletonFilePath = "../../../install/skeleton/dragon.skel";
+static const char* waspSkeletonFilePath = "../../../install/skeleton/wasp.skel";
+static const char* waspSkinFilePath = "../../../install/skin/wasp.skin";
+static const char* waspAnimFilePath = "../../../install/animation/wasp_walk.anim";
+
+
 // Window Properties
 int Window::width;
 int Window::height;
@@ -80,16 +87,16 @@ bool Window::initializeObjects(int argc,char **argv)
     if(nowLoading == loadSkeleton){
         mainSkeleton = new Skeleton();
         if(argc == 1){
-            mainSkeleton->Load("dragon.skel");
+            mainSkeleton->Load(dragonSkeletonFilePath);
         }
         //Cam->SetAspect(20);
     }
     else if(nowLoading == loadSkin){
         mainSkeleton = new Skeleton();
-        mainSkeleton -> Load("wasp.skel");
+        mainSkeleton -> Load(waspSkeletonFilePath);
         jointGroup = mainSkeleton->GetJointGroup();
         mainSkin = new Skin(jointGroup);
-        mainSkin->Start("wasp.skin");
+        mainSkin->Start(waspSkinFilePath);
 
     }
     else if(nowLoading == loadFluid){
@@ -106,7 +113,7 @@ bool Window::initializeObjects(int argc,char **argv)
         mainSkeleton = new Skeleton();
         
         if(argc == 1) {
-            mainSkeleton->Load("wasp.skel");
+            mainSkeleton->Load(waspSkeletonFilePath);
         } else{
             mainSkeleton->Load(argv[1]);
             //std::cout << argc << std::endl;
@@ -120,7 +127,7 @@ bool Window::initializeObjects(int argc,char **argv)
 
         //mainSkin->Start("wasp_smooth.skin");
         if(argc == 1){
-            mainSkin->Start("wasp.skin");
+            mainSkin->Start(waspSkinFilePath);
         } else {
             mainSkin->Start(argv[2]);
         }
@@ -129,7 +136,7 @@ bool Window::initializeObjects(int argc,char **argv)
         
         if(argc == 1){
             startTime = clock();
-            mainAnimation->Load("wasp_walk.anim");
+            mainAnimation->Load(waspAnimFilePath);
             //cerr << "been here" << endl;
             //mainAnimation->EvaluateAll(0);
         }
